@@ -23,8 +23,8 @@ Integrazioni HACS necessarie:
   - Ripetizioni singole stanze
   - Pulizia Zone
   - Vai alla posizione
-  - Svuotamento Sacchetto
-  - Caricamento Acqua
+  - Svuota Sacchetto
+  - Carica Acqua
   - Reset sensori vacuum
 
 
