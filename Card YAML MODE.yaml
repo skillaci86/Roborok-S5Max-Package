@@ -1,0 +1,972 @@
+  - title: Roborock
+    path: ''
+    icon: 'mdi:robot-vacuum'
+    badges: []
+    cards:
+      - cards:
+          - type: picture-entity
+            entity: input_boolean.vacuum_svuota_serbatoio
+            show_state: false
+            show_name: false
+            tap_action:
+              action: call-service
+              service: input_boolean.turn_off
+              service_data:
+                entity_id: input_boolean.vacuum_svuota_serbatoio
+            state_image:
+              'on': /local/immagini/roborock/vacuum_pieno1.png
+              'off': /local/immagini/roborock/vacuum_pronto.png
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - height: 40px
+          - type: vertical-stack
+            panel: true
+            cards:
+              - type: picture-elements
+                image: /local/immagini/roborock/vacuum0.png
+                elements:
+                  - type: state-label
+                    tap_action: more-info
+                    entity: vacuum.XXX
+                    style:
+                      top: 90%
+                      right: 38%
+                      color: 'rgb(255, 255, 255)'
+                      transform: 'translate(0%,-50%)'
+                      font-family: Trebuchet MS
+                      font-size: 150%
+                      font-weight: bold
+                      border-color: 'rgb(34, 154, 210)'
+                      border-radius: 8px
+                      background-color: '#e68a00'
+                  - type: state-label
+                    entity: input_text.vuoto
+                    prefix: Spazzolino
+                    style:
+                      font-family: Trebuchet MS
+                      top: 5%
+                      left: 12%
+                      font-size: 15px
+                  - type: state-label
+                    entity: sensor.vacuum_spazzolina
+                    style:
+                      top: 15%
+                      left: 13%
+                      color: '#11AB7D'
+                      font-size: 16px
+                  - type: state-label
+                    entity: input_text.vuoto
+                    prefix: Spazzola
+                    style:
+                      top: 32%
+                      left: 11%
+                      font-size: 16px
+                  - type: state-label
+                    entity: sensor.vacuum_spazzola_centrale
+                    style:
+                      font-family: Trebuchet MS
+                      top: 45%
+                      left: 13%
+                      color: '#11AB7D'
+                      font-size: 15px
+                  - type: state-label
+                    entity: input_text.vuoto
+                    prefix: Filtro
+                    style:
+                      font-family: Trebuchet MS
+                      top: 65%
+                      left: 8%
+                      font-size: 16px
+                  - type: state-label
+                    entity: sensor.vacuum_filtro
+                    style:
+                      top: 75%
+                      left: 13%
+                      color: '#11AB7D'
+                      font-size: 16px
+                  - type: state-label
+                    entity: input_text.vuoto
+                    prefix: Pulizia Sensori
+                    style:
+                      font-family: Trebuchet MS
+                      top: 13%
+                      left: 86%
+                      font-size: 15px
+                  - type: state-label
+                    entity: sensor.vacuum_sensori
+                    style:
+                      font-family: Trebuchet MS
+                      top: 21%
+                      left: 87%
+                      color: '#11AB7D'
+                      font-size: 16px
+                  - type: state-label
+                    entity: input_text.vuoto
+                    prefix: Batteria
+                    style:
+                      font-family: Trebuchet MS
+                      top: 45%
+                      left: 87%
+                      font-size: 15px
+                  - type: state-label
+                    entity: sensor.vacuum_stato_batteria
+                    style:
+                      top: 55%
+                      left: 90%
+                      color: '#11AB7D'
+                      font-size: 13px
+                  - type: state-icon
+                    entity: sensor.vacuum_stato
+                    style:
+                      top: 54%
+                      right: 8%
+                      '--iron-icon-fill-color': '#e68a00'
+                      '--iron-icon-height': 35px
+                      '--iron-icon-width': 35px
+                  - type: state-label
+                    entity: input_select.vacuum_water_mode
+                    prefix: 'Acqua: '
+                    style:
+                      top: 69%
+                      left: 77%
+                      transform: 'translate(0%,-50%)'
+                      pointer-events: none
+                      font-family: Trebuchet MS
+                      font-size: 100%
+                      font-weight: bold
+                  - type: state-label
+                    entity: sensor.vacuum_fanspeed
+                    prefix: ''
+                    style:
+                      top: 77%
+                      left: 77%
+                      transform: 'translate(0%,-50%)'
+                      pointer-events: none
+                      font-family: Trebuchet MS
+                      font-size: 100%
+                      font-weight: bold
+                  - type: state-label
+                    entity: counter.vacuum_pulizie_effettuate
+                    prefix: 'Pulizie: '
+                    style:
+                      top: 85%
+                      left: 77%
+                      transform: 'translate(0%,-50%)'
+                      pointer-events: none
+                      font-family: Trebuchet MS
+                      font-size: 100%
+                      font-weight: bold
+                  - type: state-label
+                    entity: sensor.vacuum_area_pulita
+                    prefix: 'Area:'
+                    style:
+                      top: 93%
+                      left: 77%
+                      transform: 'translate(0%,-50%)'
+                      pointer-events: none
+                      font-family: Trebuchet MS
+                      font-size: 100%
+                      font-weight: bold
+                  - type: state-label
+                    entity: sensor.vacuum_tempo_pulizia
+                    prefix: 'Tempo:'
+                    style:
+                      top: 93%
+                      left: 3%
+                      transform: 'translate(0%,-50%)'
+                      pointer-events: none
+                      font-family: Trebuchet MS
+                      font-size: 100%
+                      font-weight: bold
+                style: |
+                  ha-card {background-color: transparent;}
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - height: 40px
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - type: 'custom:hui-horizontal-stack-card'
+                cards:
+                  - type: 'custom:button-card'
+                    icon: 'mdi:home'
+                    show_icon: true
+                    show_name: false
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                    tap_action:
+                      action: call-service
+                      service: vacuum.return_to_base
+                      service_data:
+                        entity_id: vacuum.XXX
+                    entity: vacuum.XXX
+                  - type: 'custom:button-card'
+                    icon: 'mdi:play'
+                    show_icon: true
+                    show_name: false
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                    tap_action:
+                      action: call-service
+                      service: vacuum.start
+                      service_data:
+                        entity_id: vacuum.XXX
+                    entity: vacuum.XXX
+                  - type: 'custom:button-card'
+                    icon: 'mdi:pause'
+                    show_icon: true
+                    show_name: false
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                    tap_action:
+                      action: call-service
+                      service: vacuum.pause
+                      service_data:
+                        entity_id: vacuum.XXX
+                    entity: vacuum.XXX
+                  - type: 'custom:button-card'
+                    icon: 'mdi:stop'
+                    show_icon: true
+                    show_name: false
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                    tap_action:
+                      action: call-service
+                      service: vacuum.stop
+                      service_data:
+                        entity_id: vacuum.XXX
+                    entity: vacuum.XXX
+              - type: 'custom:hui-horizontal-stack-card'
+                cards:
+                  - type: 'custom:button-card'
+                    icon: 'mdi:crosshairs'
+                    show_icon: true
+                    show_name: false
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                    tap_action:
+                      action: call-service
+                      service: vacuum.clean_spot
+                      service_data:
+                        entity_id: vacuum.XXX
+                    entity: vacuum.XXX
+                  - type: 'custom:button-card'
+                    icon: 'mdi:bell-ring'
+                    show_icon: true
+                    show_name: false
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                    tap_action:
+                      action: call-service
+                      service: vacuum.locate
+                      service_data:
+                        entity_id: vacuum.XXX
+                    entity: vacuum.XXX
+                  - type: 'custom:button-card'
+                    icon: 'mdi:delete'
+                    show_icon: true
+                    show_name: false
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                    tap_action:
+                      action: call-service
+                      service: script.turn_on
+                      service_data:
+                        entity_id: script.vacuum_pulizia_serbatoio
+                    entity: vacuum.XXX
+                  - type: 'custom:button-card'
+                    icon: 'mdi:water-plus'
+                    show_icon: true
+                    show_name: false
+                    styles:
+                      card:
+                        - margin: 0px 10px 10px 0px
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                    tap_action:
+                      action: call-service
+                      service: script.turn_on
+                      service_data:
+                        entity_id: script.vacuum_carica_acqua
+                    entity: vacuum.XXX
+              - type: 'custom:hui-horizontal-stack-card'
+                cards:
+                  - type: 'custom:button-card'
+                    icon: 'mdi:minus'
+                    show_icon: true
+                    show_name: false
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                    tap_action:
+                      action: call-service
+                      service: input_select.select_previous
+                      service_data:
+                        entity_id: input_select.vacuum_fan_speed
+                    entity: input_select.vacuum_fan_speed
+                  - type: 'custom:button-card'
+                    show_icon: true
+                    show_name: false
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                    state:
+                      - value: Silenzioso
+                        color: 'rgb(204, 255, 153)'
+                        icon: 'mdi:fan-minus'
+                      - value: Bilanciato
+                        color: 'rgb(153, 255, 153)'
+                        icon: 'mdi:fan-speed-1'
+                      - value: Medio
+                        color: 'rgb(102, 255, 204)'
+                        icon: 'mdi:fan-speed-2'
+                      - value: Turbo
+                        color: 'rgb(0, 255, 153)'
+                        icon: 'mdi:fan-speed-3'
+                    entity: input_select.vacuum_fan_speed
+                  - type: 'custom:button-card'
+                    icon: 'mdi:plus'
+                    show_icon: true
+                    show_name: false
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                    tap_action:
+                      action: call-service
+                      service: input_select.select_next
+                      service_data:
+                        entity_id: input_select.vacuum_fan_speed
+                    entity: input_select.vacuum_fan_speed
+              - type: 'custom:hui-horizontal-stack-card'
+                cards:
+                  - type: 'custom:button-card'
+                    icon: 'mdi:minus'
+                    show_icon: true
+                    show_name: false
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                    tap_action:
+                      action: call-service
+                      service: input_select.select_previous
+                      service_data:
+                        entity_id: input_select.vacuum_water_mode
+                    entity: input_select.vacuum_water_mode
+                  - type: 'custom:button-card'
+                    show_icon: true
+                    show_name: false
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                    state:
+                      - value: 'off'
+                        color: 'rgb(0, 0, 0)'
+                        icon: 'mdi:water-off'
+                      - value: low
+                        color: 'rgb(153, 204, 255)'
+                        icon: 'mdi:water'
+                      - value: medium
+                        color: 'rgb(51, 204, 255)'
+                        icon: 'mdi:water'
+                      - value: high
+                        color: 'rgb(0, 153, 255)'
+                        icon: 'mdi:water'
+                    entity: input_select.vacuum_water_mode
+                  - type: 'custom:button-card'
+                    icon: 'mdi:plus'
+                    show_name: false
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                    tap_action:
+                      action: call-service
+                      service: input_select.select_next
+                      service_data:
+                        entity_id: input_select.vacuum_water_mode
+                    entity: input_select.vacuum_water_mode
+              - type: 'custom:text-divider-row'
+                text: Reset Sensori
+              - type: 'custom:hui-horizontal-stack-card'
+                cards:
+                  - type: 'custom:button-card'
+                    icon: 'mdi:filter-remove-outline'
+                    show_icon: true
+                    name: Filtro
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                    tap_action:
+                      action: call-service
+                      service: script.turn_on
+                      service_data:
+                        entity_id: script.vacuum_carica_acqua
+                    entity: vacuum.XXX
+                  - type: 'custom:button-card'
+                    icon: 'mdi:cube'
+                    show_icon: true
+                    name: Spazzola
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                    tap_action:
+                      action: call-service
+                      service: script.turn_on
+                      service_data:
+                        entity_id: script.vacuum_carica_acqua
+                    entity: vacuum.XXX
+                  - type: 'custom:button-card'
+                    icon: 'mdi:axis'
+                    show_icon: true
+                    name: Spazzolino
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                    tap_action:
+                      action: call-service
+                      service: script.turn_on
+                      service_data:
+                        entity_id: script.vacuum_carica_acqua
+                    entity: vacuum.XXX
+                  - type: 'custom:button-card'
+                    icon: 'mdi:leak'
+                    show_icon: true
+                    name: Sensor
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                    tap_action:
+                      action: call-service
+                      service: script.turn_on
+                      service_data:
+                        entity_id: script.vacuum_carica_acqua
+                    entity: vacuum.XXX
+        type: 'custom:vertical-stack-in-card'
+      - cards:
+          - type: 'custom:xiaomi-vacuum-map-card'
+            entity: vacuum.XXX
+            map_camera: camera.vacuum
+            camera_refresh_interval: 15
+            language: it
+            calibration_points:
+              - vacuum:
+                  x: 25500              # XXX        RECUPERARE LE CORDINATE DALL'ENTITA' "camera.vacuum
+                  'y': 25500            # XXX
+                map:                    # XXX
+                  x: 428                # XXX
+                  'y': 400              # XXX
+              - vacuum:                 # XXX
+                  x: 26500              # XXX
+                  'y': 25500            # XXX
+                map:                    # XXX
+                  x: 468                # XXX
+                  'y': 400              # XXX
+              - vacuum:                 # XXX
+                  x: 26500              # XXX
+                  'y': 26500            # XXX
+                map:                    # XXX
+                  x: 468                # XXX
+                  'y': 360              # XXX
+            zones:                      
+              - - - 23850               # XXX       RECUPERARE LE CORDINATE DALL'ENTITA' "camera.vacuum"
+                  - 25000               # XXX
+                  - 28050               # XXX
+                  - 27750               # XXX
+              - - - 22750               # XXX
+                  - 32000               # XXX
+                  - 28050               # XXX
+                  - 33800               # XXX
+              - - - 23900               # XXX
+                  - 31000               # XXX
+                  - 28050               # XXX
+                  - 32400               # XXX
+              - - - 20600               # XXX
+                  - 29400               # XXX
+                  - 22650               # XXX
+                  - 31200               # XXX
+              - - - 24250               # XXX
+                  - 27800               # XXX
+                  - 28250               # XXX
+                  - 30800               # XXX
+              - - - 19800               # XXX
+                  - 24800               # XXX
+                  - 23950               # XXX
+                  - 27900               # XXX
+              - - - 19800               # XXX
+                  - 28100               # XXX
+                  - 22700               # XXX
+                  - 29500               # XXX
+              - - - 19750               # XXX
+                  - 31490               # XXX
+                  - 22750               # XXX
+                  - 34450               # XXX
+              - - - 22800               # XXX
+                  - 28100               # XXX
+                  - 24200               # XXX
+                  - 32200               # XXX
+          - type: 'custom:button-card'
+            color_type: blank-card
+            styles:
+              card:
+                - height: 10px
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - type: 'custom:hui-horizontal-stack-card'
+                cards:
+                  - type: 'custom:button-card'
+                    name: Avvia Pulizia Casa
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                      icon:
+                        - color: var(--primary-text-color)
+                    state:
+                      - value: 'on'
+                        styles:
+                          icon:
+                            - color: var(--paper-item-icon-active-color)
+                    tap_action:
+                      action: call-service
+                      service: script.turn_on
+                      service_data:
+                        entity_id: script.vacuum_pulizia_zone
+              - type: 'custom:text-divider-row'
+                text: Pulizia Stanze
+              - type: 'custom:hui-horizontal-stack-card'
+                cards:
+                  - type: 'custom:button-card'
+                    show_icon: true
+                    name: Isola
+                    icon: 'mdi:fridge-variant'
+                    entity: input_boolean.vacuum_stanza_16
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                      icon:
+                        - color: var(--primary-text-color)
+                    state:
+                      - value: 'on'
+                        styles:
+                          icon:
+                            - color: var(--paper-item-icon-active-color)
+                    tap_action:
+                      action: toggle
+                    hold_action:
+                      entity: input_number.vacuum_ripetizioni_stanza_16
+                      action: more-info
+                      haptic: medium
+                  - type: 'custom:button-card'
+                    show_icon: true
+                    name: Tavolo
+                    icon: 'mdi:table-furniture'
+                    entity: input_boolean.vacuum_stanza_19
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                      icon:
+                        - color: var(--primary-text-color)
+                    state:
+                      - value: 'on'
+                        styles:
+                          icon:
+                            - color: var(--paper-item-icon-active-color)
+                    tap_action:
+                      action: toggle
+                    hold_action:
+                      entity: input_number.vacuum_ripetizioni_stanza_19
+                      action: more-info
+                      haptic: medium
+                  - type: 'custom:button-card'
+                    show_icon: true
+                    name: Soggiorno
+                    icon: 'mdi:sofa'
+                    entity: input_boolean.vacuum_stanza_17
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                      icon:
+                        - color: var(--primary-text-color)
+                    state:
+                      - value: 'on'
+                        styles:
+                          icon:
+                            - color: var(--paper-item-icon-active-color)
+                    tap_action:
+                      action: toggle
+                    hold_action:
+                      entity: input_number.vacuum_ripetizioni_stanza_17
+                      action: more-info
+                      haptic: medium
+                  - type: 'custom:button-card'
+                    show_icon: true
+                    name: Corridoio
+                    icon: 'mdi:exit-run'
+                    entity: input_boolean.vacuum_stanza_23
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                      icon:
+                        - color: var(--primary-text-color)
+                    state:
+                      - value: 'on'
+                        styles:
+                          icon:
+                            - color: var(--paper-item-icon-active-color)
+                    tap_action:
+                      action: toggle
+                    hold_action:
+                      entity: input_number.vacuum_ripetizioni_stanza_23
+                      action: more-info
+                      haptic: medium
+              - type: 'custom:hui-horizontal-stack-card'
+                cards:
+                  - type: 'custom:button-card'
+                    show_icon: true
+                    name: BagnoP
+                    icon: 'mdi:toilet'
+                    entity: input_boolean.vacuum_stanza_21
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                      icon:
+                        - color: var(--primary-text-color)
+                    state:
+                      - value: 'on'
+                        styles:
+                          icon:
+                            - color: var(--paper-item-icon-active-color)
+                    tap_action:
+                      action: toggle
+                    hold_action:
+                      entity: input_number.vacuum_ripetizioni_stanza_21
+                      action: more-info
+                      haptic: medium
+                  - type: 'custom:button-card'
+                    show_icon: true
+                    name: BagnoG
+                    icon: 'mdi:human-baby-changing-table'
+                    entity: input_boolean.vacuum_stanza_18
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                      icon:
+                        - color: var(--primary-text-color)
+                    state:
+                      - value: 'on'
+                        styles:
+                          icon:
+                            - color: var(--paper-item-icon-active-color)
+                    tap_action:
+                      action: toggle
+                    hold_action:
+                      entity: input_number.vacuum_ripetizioni_stanza_18
+                      action: more-info
+                      haptic: medium
+                  - type: 'custom:button-card'
+                    show_icon: true
+                    name: Cameretta
+                    icon: 'mdi:bed'
+                    entity: input_boolean.vacuum_stanza_22
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                      icon:
+                        - color: var(--primary-text-color)
+                    state:
+                      - value: 'on'
+                        styles:
+                          icon:
+                            - color: var(--paper-item-icon-active-color)
+                    tap_action:
+                      action: toggle
+                    hold_action:
+                      entity: input_number.vacuum_ripetizioni_stanza_22
+                      action: more-info
+                      haptic: medium
+                  - type: 'custom:button-card'
+                    show_icon: true
+                    name: Matrimoniale
+                    icon: 'mdi:bed-king'
+                    entity: input_boolean.vacuum_stanza_20
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                      icon:
+                        - color: var(--primary-text-color)
+                    state:
+                      - value: 'on'
+                        styles:
+                          icon:
+                            - color: var(--paper-item-icon-active-color)
+                    tap_action:
+                      action: toggle
+                    hold_action:
+                      entity: input_number.vacuum_ripetizioni_stanza_20
+                      action: more-info
+                      haptic: medium
+              - type: 'custom:hui-horizontal-stack-card'
+                cards:
+                  - type: 'custom:button-card'
+                    name: Avvia Pulizia Stanze
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                      icon:
+                        - color: var(--primary-text-color)
+                    state:
+                      - value: 'on'
+                        styles:
+                          icon:
+                            - color: var(--paper-item-icon-active-color)
+                    tap_action:
+                      action: call-service
+                      service: script.turn_on
+                      service_data:
+                        entity_id: script.vacuum_pulizia_stanze
+                    lock:
+                      enabled: >-
+                        [[[return (states["sensor.vacuum_stanze"].state ===
+                        "False")]]]
+                      exemptions: []
+              - type: 'custom:text-divider-row'
+                text: Pulizia a Zona
+              - type: 'custom:hui-horizontal-stack-card'
+                cards:
+                  - type: 'custom:button-card'
+                    show_icon: true
+                    name: Giorno
+                    icon: 'mdi:weather-sunny'
+                    entity: input_boolean.vacuum_zona_1
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                      icon:
+                        - color: var(--primary-text-color)
+                    state:
+                      - value: 'on'
+                        styles:
+                          icon:
+                            - color: var(--paper-item-icon-active-color)
+                    tap_action:
+                      action: toggle
+                      haptic: light
+                    hold_action:
+                      entity: input_number.vacuum_ripetizioni_zona
+                      action: more-info
+                      haptic: medium
+                  - type: 'custom:button-card'
+                    show_icon: true
+                    name: Cucina
+                    icon: 'mdi:table-chair'
+                    entity: input_boolean.vacuum_zona_2
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                      icon:
+                        - color: var(--primary-text-color)
+                    state:
+                      - value: 'on'
+                        styles:
+                          icon:
+                            - color: var(--paper-item-icon-active-color)
+                    tap_action:
+                      action: toggle
+                      haptic: light
+                    hold_action:
+                      entity: input_number.vacuum_ripetizioni_zona
+                      action: more-info
+                      haptic: medium
+                  - type: 'custom:button-card'
+                    show_icon: true
+                    name: Notte
+                    icon: 'mdi:weather-night'
+                    entity: input_boolean.vacuum_zona_3
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                      icon:
+                        - color: var(--primary-text-color)
+                    state:
+                      - value: 'on'
+                        styles:
+                          icon:
+                            - color: var(--paper-item-icon-active-color)
+                    tap_action:
+                      action: toggle
+                    hold_action:
+                      entity: input_number.vacuum_ripetizioni_zona
+                      action: more-info
+                      haptic: medium
+              - type: 'custom:hui-horizontal-stack-card'
+                cards:
+                  - type: 'custom:button-card'
+                    show_icon: true
+                    name: Bagni
+                    icon: 'mdi:toilet'
+                    entity: input_boolean.vacuum_zona_4
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                      icon:
+                        - color: var(--primary-text-color)
+                    state:
+                      - value: 'on'
+                        styles:
+                          icon:
+                            - color: var(--paper-item-icon-active-color)
+                    tap_action:
+                      action: toggle
+                      haptic: light
+                    hold_action:
+                      entity: input_number.vacuum_ripetizioni_zona
+                      action: more-info
+                      haptic: medium
+                  - type: 'custom:button-card'
+                    show_icon: true
+                    name: Camere
+                    icon: 'mdi:bed-empty'
+                    entity: input_boolean.vacuum_zona_5
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                      icon:
+                        - color: var(--primary-text-color)
+                    state:
+                      - value: 'on'
+                        styles:
+                          icon:
+                            - color: var(--paper-item-icon-active-color)
+                    tap_action:
+                      action: toggle
+                      haptic: light
+                    hold_action:
+                      entity: input_number.vacuum_ripetizioni_zona
+                      action: more-info
+                      haptic: medium
+                  - type: 'custom:button-card'
+                    show_icon: true
+                    name: Giornaliero
+                    icon: 'mdi:calendar-today'
+                    entity: input_boolean.vacuum_zona_6
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                      icon:
+                        - color: var(--primary-text-color)
+                    state:
+                      - value: 'on'
+                        styles:
+                          icon:
+                            - color: var(--paper-item-icon-active-color)
+                    tap_action:
+                      action: toggle
+                      haptic: light
+                    hold_action:
+                      entity: input_number.vacuum_ripetizioni_zona
+                      action: more-info
+                      haptic: medium
+              - type: 'custom:hui-horizontal-stack-card'
+                cards:
+                  - type: 'custom:button-card'
+                    name: Avvia Pulizia Zone
+                    styles:
+                      card:
+                        - box-shadow: >-
+                            -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px
+                            rgba(0, 0, 0, .03)
+                      icon:
+                        - color: var(--primary-text-color)
+                    state:
+                      - value: 'on'
+                        styles:
+                          icon:
+                            - color: var(--paper-item-icon-active-color)
+                    tap_action:
+                      action: call-service
+                      service: script.turn_on
+                      service_data:
+                        entity_id: script.vacuum_pulizia_zone
+                    lock:
+                      enabled: >-
+                        [[[return (states["sensor.vacuum_zone"].state ===
+                        "False")]]]
+                      exemptions: []
+        type: 'custom:vertical-stack-in-card'
