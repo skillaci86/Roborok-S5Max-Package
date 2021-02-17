@@ -26,7 +26,7 @@ Integrazioni HACS necessarie:
   - Svuota Sacchetto
   - Carica Acqua
   - Reset sensori vacuum
-
+  - Notifiche Telegram/google
 
 # Spiegazioni
 Questo packages è molto articolato. Comprende funzioni che probabilmente a molti di voi non serviranno e quindi potrete eliminare.
