@@ -1,5 +1,7 @@
 # Roborok-S5Max-Package
 Gestione Roborock S5Max da HomeAssistant
+<img src="https://github.com/skillaci86/Roborok-S5Max-Package/blob/main/Anteprima.png" alt="Anteprima">
+
 
 # Prerequisiti
 Custom Component necessari:
