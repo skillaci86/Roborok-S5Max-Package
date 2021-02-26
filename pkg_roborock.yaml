@@ -940,13 +940,10 @@ script:
             - input_boolean.vacuum_zona_1        
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_aspirapolvere
+        entity_id: script.vacuum_set_aspirapolvere     
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_water_off        
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze      
+        entity_id: script.vacuum_multi_stanze      
 
   vacuum_pulizia_zona_2:
     alias: *zona_2
@@ -957,13 +954,10 @@ script:
             - input_boolean.vacuum_zona_2        
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_aspirapolvere
+        entity_id: script.vacuum_set_aspirapolvere  
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_water_off        
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze 
+        entity_id: script.vacuum_multi_stanze 
 
   vacuum_pulizia_zona_3:
     alias: *zona_3
@@ -974,13 +968,10 @@ script:
             - input_boolean.vacuum_zona_3      
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_aspirapolvere
+        entity_id: script.vacuum_set_aspirapolvere     
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_water_off        
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze
+        entity_id: script.vacuum_multi_stanze
 
   vacuum_pulizia_zona_4:
     alias: *zona_4
@@ -991,13 +982,10 @@ script:
             - input_boolean.vacuum_zona_4      
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_aspirapolvere
+        entity_id: script.vacuum_set_aspirapolvere      
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_water_off        
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze
+        entity_id: script.vacuum_multi_stanze
 
   vacuum_pulizia_zona_5:
     alias: *zona_5
@@ -1008,13 +996,10 @@ script:
             - input_boolean.vacuum_zona_5      
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_aspirapolvere
+        entity_id: script.vacuum_set_aspirapolvere       
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_water_off        
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze        
+        entity_id: script.vacuum_multi_stanze        
          
   vacuum_pulizia_zona_6:
     alias: *zona_6
@@ -1025,13 +1010,10 @@ script:
             - input_boolean.vacuum_zona_6      
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_aspirapolvere
+        entity_id: script.vacuum_set_aspirapolvere       
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_water_off        
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze
+        entity_id: script.vacuum_multi_stanze
         
   ######################
   ##  LAVA
@@ -1149,10 +1131,7 @@ script:
             - input_boolean.vacuum_zona_1        
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_lavaggio
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_water_off        
+        entity_id: script.vacuum_set_lavaggio   
       - delay: 1
       - service: script.turn_on
         entity_id: script.vacuum_multi_stanze      
@@ -1166,10 +1145,7 @@ script:
             - input_boolean.vacuum_zona_2        
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_lavaggio
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_water_off        
+        entity_id: script.vacuum_set_lavaggio      
       - delay: 1
       - service: script.turn_on
         entity_id: script.vacuum_multi_stanze
@@ -1183,10 +1159,7 @@ script:
             - input_boolean.vacuum_zona_3      
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_lavaggio
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_water_off        
+        entity_id: script.vacuum_set_lavaggio       
       - delay: 1
       - service: script.turn_on
         entity_id: script.vacuum_multi_stanze
@@ -1200,10 +1173,7 @@ script:
             - input_boolean.vacuum_zona_4      
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_lavaggio
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_water_off        
+        entity_id: script.vacuum_set_lavaggio   
       - delay: 1
       - service: script.turn_on
         entity_id: script.vacuum_multi_stanze
@@ -1217,10 +1187,7 @@ script:
             - input_boolean.vacuum_zona_5      
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_lavaggio
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_water_off        
+        entity_id: script.vacuum_set_lavaggio       
       - delay: 1
       - service: script.turn_on
         entity_id: script.vacuum_multi_stanze        
@@ -1234,14 +1201,11 @@ script:
             - input_boolean.vacuum_zona_6      
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_lavaggio
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_water_off        
+        entity_id: script.vacuum_set_lavaggio       
       - delay: 1
       - service: script.turn_on
         entity_id: script.vacuum_multi_stanze
-
+        
 ####### FINE SCRIPT PER GOOGLE      
 
 ################################################################################
