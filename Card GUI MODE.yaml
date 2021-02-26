@@ -1,4 +1,4 @@
-#        Bisonga aggiungere 3 card manuali
+#        Bisonga aggiungere 2 card manuali
 
 #################### CARD MANUALE 1 #########################
 cards:
@@ -27,7 +27,7 @@ cards:
         elements:
           - type: state-label
             tap_action: more-info
-            entity: vacuum.XXX
+            entity: XXX                                         #vacuum entity_id
             style:
               top: 90%
               right: 38%
@@ -201,10 +201,10 @@ cards:
                     0, 0, .03)
             tap_action:
               action: call-service
-              service: vacuum.return_to_base
+              service: script.turn_on
               service_data:
-                entity_id: vacuum.XXX
-            entity: vacuum.XXX
+                entity_id: vacuum_torna_a_casa
+            entity: XXX                                                #vacuum entity_id
           - type: 'custom:button-card'
             icon: 'mdi:play'
             show_icon: true
@@ -215,11 +215,10 @@ cards:
                     -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px rgba(0,
                     0, 0, .03)
             tap_action:
-              action: call-service
-              service: vacuum.start
+              service: script.turn_on
               service_data:
-                entity_id: vacuum.XXX
-            entity: vacuum.XXX
+                entity_id: vacuum_start
+            entity: XXX                                                #vacuum entity_id
           - type: 'custom:button-card'
             icon: 'mdi:pause'
             show_icon: true
@@ -230,11 +229,10 @@ cards:
                     -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px rgba(0,
                     0, 0, .03)
             tap_action:
-              action: call-service
-              service: vacuum.pause
+              service: script.turn_on
               service_data:
-                entity_id: vacuum.XXX
-            entity: vacuum.XXX
+                entity_id: vacuum_pause
+            entity: XXX                                                #vacuum entity_id
           - type: 'custom:button-card'
             icon: 'mdi:stop'
             show_icon: true
@@ -245,11 +243,10 @@ cards:
                     -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px rgba(0,
                     0, 0, .03)
             tap_action:
-              action: call-service
-              service: vacuum.stop
+              service: script.turn_on
               service_data:
-                entity_id: vacuum.XXX
-            entity: vacuum.XXX
+                entity_id: vacuum_stop
+            entity: XXX                                                #vacuum entity_id
       - type: 'custom:hui-horizontal-stack-card'
         cards:
           - type: 'custom:button-card'
@@ -262,11 +259,10 @@ cards:
                     -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px rgba(0,
                     0, 0, .03)
             tap_action:
-              action: call-service
-              service: vacuum.clean_spot
+              service: script.turn_on
               service_data:
-                entity_id: vacuum.XXX
-            entity: vacuum.XXX
+                entity_id: vacuum_clean_spot
+            entity: XXX                                                #vacuum entity_id
           - type: 'custom:button-card'
             icon: 'mdi:bell-ring'
             show_icon: true
@@ -277,11 +273,10 @@ cards:
                     -1px -1px 5px rgba(107, 139, 194, .4), 5px 5px 8px rgba(0,
                     0, 0, .03)
             tap_action:
-              action: call-service
-              service: vacuum.locate
+              service: script.turn_on
               service_data:
-                entity_id: vacuum.XXX
-            entity: vacuum.XXX
+                entity_id: vacuum_locate
+            entity: XXX                                                #vacuum entity_id
           - type: 'custom:button-card'
             icon: 'mdi:delete'
             show_icon: true
@@ -296,7 +291,7 @@ cards:
               service: script.turn_on
               service_data:
                 entity_id: script.vacuum_pulizia_serbatoio
-            entity: vacuum.XXX
+            entity: XXX                                                #vacuum entity_id
           - type: 'custom:button-card'
             icon: 'mdi:water-plus'
             show_icon: true
@@ -312,7 +307,7 @@ cards:
               service: script.turn_on
               service_data:
                 entity_id: script.vacuum_carica_acqua
-            entity: vacuum.XXX
+            entity: XXX                                                #vacuum entity_id
       - type: 'custom:hui-horizontal-stack-card'
         cards:
           - type: 'custom:button-card'
@@ -437,8 +432,8 @@ cards:
               action: call-service
               service: script.turn_on
               service_data:
-                entity_id: script.vacuum_carica_acqua
-            entity: vacuum.XXX
+                entity_id: script.vacuum_reset_filter_work_time
+            entity: XXX                                                #vacuum entity_id
           - type: 'custom:button-card'
             icon: 'mdi:cube'
             show_icon: true
@@ -452,8 +447,8 @@ cards:
               action: call-service
               service: script.turn_on
               service_data:
-                entity_id: script.vacuum_carica_acqua
-            entity: vacuum.XXX
+                entity_id: script.vacuum_reset_main_brush_left
+            entity: XXX                                                #vacuum entity_id
           - type: 'custom:button-card'
             icon: 'mdi:axis'
             show_icon: true
@@ -467,8 +462,8 @@ cards:
               action: call-service
               service: script.turn_on
               service_data:
-                entity_id: script.vacuum_carica_acqua
-            entity: vacuum.XXX
+                entity_id: script.vacuum_reset_side_brush_work_time
+            entity: XXX                                                #vacuum entity_id
           - type: 'custom:button-card'
             icon: 'mdi:leak'
             show_icon: true
@@ -482,75 +477,76 @@ cards:
               action: call-service
               service: script.turn_on
               service_data:
-                entity_id: script.vacuum_carica_acqua
-            entity: vacuum.XXX
+                entity_id: vacuum_reset_sensor_dirty_time
+            entity: XXX                                                #vacuum entity_id
 type: 'custom:vertical-stack-in-card'
 
-
-
+#############################################################
 #################### CARD MANUALE 2 #########################
+#############################################################
+
 cards:
   - type: 'custom:xiaomi-vacuum-map-card'
-    entity: vacuum.XXX
-    map_camera: camera.vacuum
+    entity: XXX                         #vacuum entity_id
+    map_camera: XXX                     #camera entity_id
     camera_refresh_interval: 15
     language: it
     calibration_points:
-      - vacuum:
-          x: 25500      # XXX        RECUPERARE LE CORDINATE DALL'ENTITA' "camera.vacuum"
-          'y': 25500    # XXX
-        map:            # XXX
-          x: 428        # XXX
-          'y': 400      # XXX
-      - vacuum:         # XXX
-          x: 26500      # XXX
-          'y': 25500    # XXX
-        map:            # XXX
-          x: 468        # XXX
-          'y': 400      # XXX
-      - vacuum:         # XXX
-          x: 26500      # XXX
-          'y': 26500    # XXX
-        map:            # XXX
-          x: 468        # XXX
-          'y': 360      # XXX
-    zones:
-      - - - 23850       # XXX       RECUPERARE LE CORDINATE DALL'ENTITA' "camera.vacuum"
-          - 25000       # XXX
-          - 28050       # XXX
-          - 27750       # XXX
-      - - - 22750       # XXX
-          - 32000       # XXX
-          - 28050       # XXX
-          - 33800       # XXX
-      - - - 23900       # XXX
-          - 31000       # XXX
-          - 28050       # XXX
-          - 32400       # XXX
-      - - - 20600       # XXX
-          - 29400       # XXX
-          - 22650       # XXX
-          - 31200       # XXX
-      - - - 24250       # XXX
-          - 27800       # XXX
-          - 28250       # XXX
-          - 30800       # XXX
-      - - - 19800       # XXX
-          - 24800       # XXX
-          - 23950       # XXX
-          - 27900       # XXX
-      - - - 19800       # XXX
-          - 28100       # XXX
-          - 22700       # XXX
-          - 29500       # XXX
-      - - - 19750       # XXX
-          - 31490       # XXX
-          - 22750       # XXX
-          - 34450       # XXX
-      - - - 22800       # XXX
-          - 28100       # XXX
-          - 24200       # XXX
-          - 32200       # XXX
+      - vacuum:                         # XXX        RECUPERARE LE CORDINATE DALL'ENTITA' "camera.vacuum
+          x: 25500                      # XXX
+          'y': 25500                    # XXX
+        map:                            # XXX
+          x: 428                        # XXX
+          'y': 400                      # XXX
+      - vacuum:                         # XXX
+          x: 26500                      # XXX
+          'y': 25500                    # XXX
+        map:                            # XXX
+          x: 468                        # XXX
+          'y': 400                      # XXX
+      - vacuum:                         # XXX
+          x: 26500                      # XXX
+          'y': 26500                    # XXX
+        map:                            # XXX
+          x: 468                        # XXX
+          'y': 360                      
+    zones:                              # XXX       RECUPERARE LE CORDINATE DALL'ENTITA' "camera.vacuum"
+      - - - 23850                       # XXX
+          - 25000                       # XXX
+          - 28050                       # XXX
+          - 27750                       # XXX
+      - - - 22750                       # XXX
+          - 32000                       # XXX
+          - 28050                       # XXX
+          - 33800                       # XXX
+      - - - 23900                       # XXX
+          - 31000                       # XXX
+          - 28050                       # XXX
+          - 32400                       # XXX
+      - - - 20600                       # XXX
+          - 29600                       # XXX
+          - 22650                       # XXX
+          - 31200                       # XXX
+      - - - 24250                       # XXX
+          - 27800                       # XXX
+          - 28250                       # XXX
+          - 30800                       # XXX
+      - - - 19800                       # XXX
+          - 24800                       # XXX
+          - 23950                       # XXX
+          - 27900                       # XXX
+      - - - 19800                       # XXX
+          - 28100                       # XXX
+          - 22700                       # XXX
+          - 29500                       # XXX
+      - - - 19750                       # XXX
+          - 31490                       # XXX
+          - 22750                       # XXX
+          - 34450                       # XXX
+      - - - 22800                       # XXX
+          - 28100                       # XXX
+          - 24200                       # XXX
+          - 32200
   - type: 'custom:button-card'
     color_type: blank-card
     styles:
@@ -579,14 +575,14 @@ cards:
               action: call-service
               service: script.turn_on
               service_data:
-                entity_id: script.vacuum_pulizia_zone
+                entity_id: script.vacuum_pulizia_casa
       - type: 'custom:text-divider-row'
         text: Pulizia Stanze
       - type: 'custom:hui-horizontal-stack-card'
         cards:
           - type: 'custom:button-card'
             show_icon: true
-            name: Isola
+            name: XXX                                                               #NOME STANZA16
             icon: 'mdi:fridge-variant'
             entity: input_boolean.vacuum_stanza_16
             styles:
@@ -609,7 +605,7 @@ cards:
               haptic: medium
           - type: 'custom:button-card'
             show_icon: true
-            name: Tavolo
+            name: XXX                                                               #NOME STANZA19
             icon: 'mdi:table-furniture'
             entity: input_boolean.vacuum_stanza_19
             styles:
@@ -632,7 +628,7 @@ cards:
               haptic: medium
           - type: 'custom:button-card'
             show_icon: true
-            name: Soggiorno
+            name: XXX                                                               #NOME STANZA17
             icon: 'mdi:sofa'
             entity: input_boolean.vacuum_stanza_17
             styles:
@@ -655,7 +651,7 @@ cards:
               haptic: medium
           - type: 'custom:button-card'
             show_icon: true
-            name: Corridoio
+            name: XXX                                                               #NOME STANZA23
             icon: 'mdi:exit-run'
             entity: input_boolean.vacuum_stanza_23
             styles:
@@ -680,7 +676,7 @@ cards:
         cards:
           - type: 'custom:button-card'
             show_icon: true
-            name: BagnoP
+            name: XXX                                                               #NOME STANZA21
             icon: 'mdi:toilet'
             entity: input_boolean.vacuum_stanza_21
             styles:
@@ -703,7 +699,7 @@ cards:
               haptic: medium
           - type: 'custom:button-card'
             show_icon: true
-            name: BagnoG
+            name: XXX                                                               #NOME STANZA18
             icon: 'mdi:human-baby-changing-table'
             entity: input_boolean.vacuum_stanza_18
             styles:
@@ -726,7 +722,7 @@ cards:
               haptic: medium
           - type: 'custom:button-card'
             show_icon: true
-            name: Cameretta
+            name: XXX                                                               #NOME STANZA22
             icon: 'mdi:bed'
             entity: input_boolean.vacuum_stanza_22
             styles:
@@ -749,7 +745,7 @@ cards:
               haptic: medium
           - type: 'custom:button-card'
             show_icon: true
-            name: Matrimoniale
+            name: XXX                                                               #NOME STANZA20
             icon: 'mdi:bed-king'
             entity: input_boolean.vacuum_stanza_20
             styles:
@@ -790,9 +786,11 @@ cards:
               action: call-service
               service: script.turn_on
               service_data:
-                entity_id: script.vacuum_pulizia_stanze
+                entity_id: script.vacuum_multi_stanze
             lock:
-              enabled: '[[[return (states["sensor.vacuum_stanze"].state === "False")]]]'
+              enabled: >-
+                [[[return (states["sensor.vacuum_stanze_selezionate"].state ===
+                "False")]]]
               exemptions: []
       - type: 'custom:text-divider-row'
         text: Pulizia a Zona
@@ -800,7 +798,7 @@ cards:
         cards:
           - type: 'custom:button-card'
             show_icon: true
-            name: Giorno
+            name: XXX                                                               #NOME ZONA1
             icon: 'mdi:weather-sunny'
             entity: input_boolean.vacuum_zona_1
             styles:
@@ -824,7 +822,7 @@ cards:
               haptic: medium
           - type: 'custom:button-card'
             show_icon: true
-            name: Cucina
+            name: XXX                                                               #NOME ZONA2
             icon: 'mdi:table-chair'
             entity: input_boolean.vacuum_zona_2
             styles:
@@ -848,7 +846,7 @@ cards:
               haptic: medium
           - type: 'custom:button-card'
             show_icon: true
-            name: Notte
+            name: XXX                                                               #NOME ZONA3
             icon: 'mdi:weather-night'
             entity: input_boolean.vacuum_zona_3
             styles:
@@ -873,7 +871,7 @@ cards:
         cards:
           - type: 'custom:button-card'
             show_icon: true
-            name: Bagni
+            name: XXX                                                               #NOME ZONA4
             icon: 'mdi:toilet'
             entity: input_boolean.vacuum_zona_4
             styles:
@@ -897,7 +895,7 @@ cards:
               haptic: medium
           - type: 'custom:button-card'
             show_icon: true
-            name: Camere
+            name: XXX                                                               #NOME ZONA5
             icon: 'mdi:bed-empty'
             entity: input_boolean.vacuum_zona_5
             styles:
@@ -921,7 +919,7 @@ cards:
               haptic: medium
           - type: 'custom:button-card'
             show_icon: true
-            name: Giornaliero
+            name: XXX                                                               #NOME ZONA6
             icon: 'mdi:calendar-today'
             entity: input_boolean.vacuum_zona_6
             styles:
@@ -963,9 +961,10 @@ cards:
               action: call-service
               service: script.turn_on
               service_data:
-                entity_id: script.vacuum_pulizia_zone
+                entity_id: script.vacuum_multi_stanze
             lock:
-              enabled: '[[[return (states["sensor.vacuum_zone"].state === "False")]]]'
+              enabled: >-
+                [[[return (states["sensor.vacuum_stanze_selezionate"].state ===
+                "False")]]]
               exemptions: []
 type: 'custom:vertical-stack-in-card'
-

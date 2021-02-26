@@ -5,9 +5,52 @@ homeassistant:
   customize:
     package.node_anchors:
       customize: &customize
-        package: 'Roborock S5 Max Package'
+        package: 'Xiaomi Roborock S5MAX Package'
         version: 'v1.0'
         author: 'Skillaci86'
+
+    ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##
+      setting:
+        vacuum_host: &host !secret ip_roborock
+        vacuum_name: &name XXX                                          #nome vacuum
+        vacuum_entity: &entity 'XXX'                                    #entity_id vacuum
+        vacuum_camera: &camera  'XXX'                                   #entity_id camera
+        vacuum_token: &token !XXX                                       #token
+        vacuum_username: &username XXX                                  #username
+        vacuum_password: &password XXX                                  #password
+        vacuum_name_stanza_16: &stanza_16 'XXX'                         #nome stanza
+        vacuum_name_stanza_17: &stanza_17 'XXX'                         #nome stanza
+        vacuum_name_stanza_18: &stanza_18 'XXX'                         #nome stanza
+        vacuum_name_stanza_19: &stanza_19 'XXX'                         #nome stanza
+        vacuum_name_stanza_20: &stanza_20 'XXX'                         #nome stanza
+        vacuum_name_stanza_21: &stanza_21 'XXX'                         #nome stanza
+        vacuum_name_stanza_22: &stanza_22 'XXX'                         #nome stanza
+        vacuum_name_stanza_23: &stanza_23 'XXX'                         #nome stanza
+        vacuum_name_zona_1: &zona_1 'XXX'                               #nome zona
+        vacuum_name_zona_2: &zona_2 'XXX'                               #nome zona
+        vacuum_name_zona_3: &zona_3 'XXX'                               #nome zona
+        vacuum_name_zona_4: &zona_4 'XXX'                               #nome zona
+        vacuum_name_zona_5: &zona_5 'XXX'                               #nome zona
+        vacuum_name_zona_6: &zona_6 'XXX'                               #nome zona
+        vacuum_segments: &coord_casa XXX                                #coordinate room [es 16,17...]
+        vacuum_coord_stanza_16: &coord_stanza_16 XXX                    #coordinate stanza [[23850, 25000, 28050, 27750]]
+        vacuum_coord_stanza_17: &coord_stanza_17 XXX                    #coordinate stanza
+        vacuum_coord_stanza_18: &coord_stanza_18 XXX                    #coordinate stanza
+        vacuum_coord_stanza_19: &coord_stanza_19 XXX                    #coordinate stanza
+        vacuum_coord_stanza_20: &coord_stanza_20 XXX                    #coordinate stanza
+        vacuum_coord_stanza_21: &coord_stanza_21 XXX                    #coordinate stanza
+        vacuum_coord_stanza_22: &coord_stanza_22 XXX                    #coordinate stanza
+        vacuum_coord_stanza_23: &coord_stanza_23 XXX                    #coordinate stanza
+        vacuum_coord_zona_1: &coord_zona_1                              #coordinate zone
+        vacuum_coord_zona_2: &coord_zona_2                              #coordinate zone
+        vacuum_coord_zona_3: &coord_zona_3                              #coordinate zone
+        vacuum_coord_zona_4: &coord_zona_4                              #coordinate zone
+        vacuum_coord_zona_5: &coord_zona_5                              #coordinate zone
+        vacuum_coord_zona_6: &coord_zona_6                              #coordinate zone
+        vacuum_coord_cestino: &coord_cestino XXX                        #coordinate cestino es [27518,26026]
+        vacuum_coord_acqua: &coord_acqua XXX                            #coordinate acqua es [27518,26026]
+        vacuum_media_player: &play XXX                                  #mediaplayer per riproduzione annunci google                 
+        vacuum_notifica_telegram: &telegram XXX                         #chadid telegram per notifiche                             
 
 
 #******************************************************************************#
@@ -19,19 +62,19 @@ homeassistant:
 ###################################################
 vacuum:
   - platform: xiaomi_miio
-    host: XXX.XXX.XXX.XXX
-    token: XXX
-    name: XXX 
+    host: *host
+    token: *token
+    name: *name
 
 camera:
   - platform: xiaomi_cloud_map_extractor
-    host: XXX.XXX.XXX.XXX
-    token: XXX
-    username: XXX
-    password: XXX
+    host: *host
+    token: *token
+    username: *username 
+    password: *password 
     country: "de"
-    name: "Vacuum"
-    scan_interval: 30
+    name: *name 
+    scan_interval: 15
     colors:
       color_map_outside: [255, 255, 255]
       color_path: [255, 255, 255]
@@ -65,14 +108,14 @@ camera:
       - rooms
       - map_name
     room_colors:
-      16: [133, 193, 233]  #-->  Blu chiaro
-      17: [72, 201, 176]   #-->  Verde
-      18: [249, 84, 131]   #-->  Rosa
-      19: [84, 153, 199]   #-->  Blu scuro
-      20: [118, 176, 247]  #-->  Blu chiaro
-      21: [129, 209, 249]  #-->  Celeste
-      22: [205, 106, 247]  #-->  Viola  
-      23: [252, 212, 81]   #-->  Arancio
+      16: [133, 193, 233]  
+      17: [72, 201, 176]
+      18: [249, 84, 131]
+      19: [84, 153, 199]
+      20: [118, 176, 247]
+      21: [129, 209, 249]
+      22: [205, 106, 247]
+      23: [252, 212, 81]
     draw:
       - charger
       - path
@@ -88,13 +131,13 @@ camera:
 #########################################
 ###### Binary_sensor
 #########################################
-### Utilizzato per controllare connessione robot
 binary_sensor:
   - platform: ping
-    name: Connessione Roborock
-    host: XXX
+    name: connessione vacuum
+    host: *host
     count: 2 
     scan_interval: 15
+    
 ################################################################################
 ##                  Counter
 ###################################################
@@ -113,63 +156,63 @@ counter:
 
 input_number:
    vacuum_ripetizioni_stanza_16:
-    name: Passaggi Isola
+    name: *stanza_16
     initial: 1
     min: 1
     max: 3
     step: 1
    
    vacuum_ripetizioni_stanza_19:
-    name: Passaggi Tavolo
+    name: *stanza_19
     initial: 1
     min: 1
     max: 3
     step: 1   
     
    vacuum_ripetizioni_stanza_17:
-    name: Passaggi XXX
+    name: *stanza_17
     initial: 1
     min: 1
     max: 3
     step: 1       
 
    vacuum_ripetizioni_stanza_23:
-    name: Passaggi Corridoio
+    name: *stanza_23
     initial: 1
     min: 1
     max: 3
     step: 1       
 
    vacuum_ripetizioni_stanza_20:
-    name: Passaggi CameraDaLetto
+    name: *stanza_20
     initial: 1
     min: 1
     max: 3
     step: 1   
 
    vacuum_ripetizioni_stanza_21:
-    name: Passaggi BagnoPiccolo
+    name: *stanza_21
     initial: 1
     min: 1
     max: 3
     step: 1   
 
    vacuum_ripetizioni_stanza_18:
-    name: Passaggi BagnoGrande
+    name: *stanza_18 
     initial: 1
     min: 1
     max: 3
     step: 1    
 
    vacuum_ripetizioni_stanza_22:
-    name: Passaggi Cameretta
+    name: *stanza_22 
     initial: 1
     min: 1
     max: 3
     step: 1 
 
    vacuum_ripetizioni_zona:
-    name: Passaggi Zona
+    name: Ripetizioni Zona
     initial: 1
     min: 1
     max: 3
@@ -189,12 +232,12 @@ input_select:
     - Turbo
   
   vacuum_water_mode:
-    name: Tipo di aspirazione
+    name: Quantita Acqua
     options:
-    - 'Off'
-    - Low
-    - Medium
-    - High    
+    - 'off'
+    - low
+    - medium
+    - high    
     
 
 ################################################################################
@@ -206,35 +249,33 @@ input_boolean:
     name: Svuota Serbatoio
 
   vacuum_stanza_16:
-    name: Isola
+    name: *stanza_16
   vacuum_stanza_19:
-    name: Tavolo
+    name: *stanza_19
   vacuum_stanza_17:
-    name: XXX
+    name: *stanza_17
   vacuum_stanza_23:
-    name: Corridoio
+    name: *stanza_23
   vacuum_stanza_20:
-    name: CameraDaLetto
+    name: *stanza_20
   vacuum_stanza_21:
-    name: BagnoPiccolo
+    name: *stanza_21
   vacuum_stanza_18:
-    name: BagnoGrande
+    name: *stanza_18
   vacuum_stanza_22:
-    name: Cameretta
+    name: *stanza_22
   vacuum_zona_1:
-    name: Zona Giorno
+    name: *zona_1
   vacuum_zona_2:
-    name: Zona Cucina 
+    name: *zona_2
   vacuum_zona_3:
-    name: Zona Notte   
+    name: *zona_3   
   vacuum_zona_4:
-    name: Zona Bagni 
+    name: *zona_4 
   vacuum_zona_5:
-    name: Zona Camere
+    name: *zona_5
   vacuum_zona_6:
-    name: Zona Giornaliero    
-
-
+    name: *zona_6    
 
 ################################################################################
 ##                  Sensor
@@ -248,9 +289,9 @@ sensor:
       ######################      
       vacuum_stato:
         friendly_name: Stato robot
-        value_template: "{{ state_attr('vacuum.XXX', 'status') }}"
+        value_template: "{{ state_attr('XXX', 'status') }}"                 #vacuum entity_id
         icon_template: >
-          {% set val =   state_attr('vacuum.XXX', 'status')  %}
+          {% set val =   state_attr('XXX', 'status')  %}                    #vacuum entity_id
           {% if val == 'Charging' %}
             mdi:battery-charging
           {% elif val == 'Cleaning' %}
@@ -266,71 +307,59 @@ sensor:
           {% else %}
             mdi:battery
           {% endif %}
-          
-      vacuum_stanze:
-        friendly_name: 'Stanze Selezionate'
-        value_template: >-
-            {% set object = [states('input_boolean.vacuum_stanza_16'), states('input_boolean.vacuum_stanza_17'), states('input_boolean.vacuum_stanza_18'), states('input_boolean.vacuum_stanza_19'), states('input_boolean.vacuum_stanza_20'), states('input_boolean.vacuum_stanza_21'), states('input_boolean.vacuum_stanza_22'), states('input_boolean.vacuum_stanza_23')] %}
-            {{ object | select('equalto', 'on') | list | count >= 1}}
 
-      vacuum_zone:
-        friendly_name: 'Zone Selezionate'
-        value_template: >-
-            {% set object = [states('input_boolean.vacuum_zona_1'), states('input_boolean.vacuum_zona_2'), states('input_boolean.vacuum_zona_3'), states('input_boolean.vacuum_zona_4'), states('input_boolean.vacuum_zona_5'), states('input_boolean.vacuum_zona_6')] %}
-            {{ object | select('equalto', 'on') | list | count >= 1}}
-            
       vacuum_fanspeed:
         friendly_name: Fan Speed
-        value_template: "Mode: {{ state_attr('vacuum.XXX', 'fan_speed') }}"
+        value_template: "Mode: {{ state_attr('XXX', 'fan_speed') }}"       #vacuum entity_id
         icon_template: 'mdi:speedometer'
       
       vacuum_stato_batteria:
         friendly_name: Batteria robot
-        value_template: "{{ state_attr('vacuum.XXX', 'battery_level') }}"
+        value_template: "{{ state_attr('XXX', 'battery_level') }}"         #vacuum entity_id
         unit_of_measurement: '%'
-        icon_template: "{{ state_attr('vacuum.XXX', 'battery_icon') }}"
+        icon_template: "{{ state_attr('XXX', 'battery_icon') }}"            #vacuum entity_id
       
       vacuum_tempo_pulizia:
         friendly_name: Tempo ultima pulizia
         unit_of_measurement: 'min'
-        value_template: "{{ state_attr('vacuum.XXX', 'cleaning_time')  }}"
+        value_template: "{{ state_attr('XXX', 'cleaning_time')  }}"          #vacuum entity_id
         icon_template: 'mdi:timer'
       
       vacuum_area_pulita:
         friendly_name: Area Pulita
         unit_of_measurement: 'm ²'
-        value_template: "{{ state_attr('vacuum.XXX', 'cleaned_area')  }}"
+        value_template: "{{ state_attr('XXX', 'cleaned_area')  }}"             #vacuum entity_id
         icon_template: 'mdi:ruler'
       
       vacuum_spazzola_centrale:
         friendly_name: Sostituzione Spazzola
         unit_of_measurement: '%'
-        value_template: "{{ ((state_attr('vacuum.XXX', 'main_brush_left')+1)*100/300) | int}}"
+        value_template: "{{ ((state_attr('XXX', 'main_brush_left')+1)*100/300) | int}}"        #vacuum entity_id
         icon_template: 'mdi:screwdriver'
       
       vacuum_spazzolina:
         friendly_name: Sostituzione Spazzolina
         unit_of_measurement: '%'
-        value_template: "{{ ((state_attr('vacuum.XXX', 'side_brush_left')+1)*100/200) | int}}"
+        value_template: "{{ ((state_attr('XXX', 'side_brush_left')+1)*100/200) | int}}"            #vacuum entity_id
         icon_template: 'mdi:screwdriver'
       
       vacuum_filtro:
         friendly_name: Sostituzione Filtro
         unit_of_measurement: '%'
-        value_template: "{{ ((state_attr('vacuum.XXX', 'filter_left')+1)*100/150) | int}}"
+        value_template: "{{ ((state_attr('XXX', 'filter_left')+1)*100/150) | int}}"                #vacuum entity_id
         icon_template: 'mdi:screwdriver'
       
       vacuum_sensori:
         friendly_name: Pulizia Sensori
         unit_of_measurement: '%'
-        value_template: "{{ ((state_attr('vacuum.XXX', 'sensor_dirty_left')+1)*100/30) | int}}"
+        value_template: "{{ ((state_attr('XXX', 'sensor_dirty_left')+1)*100/30) | int}}"               #vacuum entity_id
         icon_template: 'mdi:screwdriver'
       
       vacuum_non_disturbare:
         friendly_name: Non disturbare
-        value_template: "{{ state_attr('vacuum.XXX', 'do_not_disturb')  }}"
+        value_template: "{{ state_attr('XXX', 'do_not_disturb')  }}"                       #vacuum entity_id
         icon_template: >
-          {% set val =  state_attr('vacuum.XXX', 'do_not_disturb')  %}
+          {% set val =  state_attr('XXX', 'do_not_disturb')  %}                            #vacuum entity_id
           {% if val == 'on' %}
             mdi:do-not-disturb
           {% else %}
@@ -339,174 +368,337 @@ sensor:
       
       vacuum_inizio_non_disturbare:
         friendly_name: Inizio non disturbare
-        value_template: "On DND: {{ state_attr('vacuum.XXX', 'do_not_disturb_start') }}"
+        value_template: "On DND: {{ state_attr('XXX', 'do_not_disturb_start') }}"              #vacuum entity_id
         icon_template: 'mdi:screwdriver'
       
       vacuum_fine_non_disturbare:
         friendly_name: Fine non disturbare
-        value_template: "Off DND: {{ state_attr('vacuum.XXX', 'do_not_disturb_start') }}"
+        value_template: "Off DND: {{ state_attr('XXX', 'do_not_disturb_start') }}"                 #vacuum entity_id
         icon_template: 'mdi:screwdriver'          
 
-
-      #########################
-      ##  Sensori Multistanza
-      #########################    
-      
- ### XXX Da cambiare i numeri stanza con quelli in configurazione     
-      
-      vacuum_pulizia_multi_stanze1:
-        friendly_name: 'seleziona stanze1'
+      vacuum_stanze_selezionate:
+        friendly_name: 'Stanze Selezionate'
         value_template: >-
-            {% set do_stanza_16 = is_state('input_boolean.vacuum_stanza_16', 'on') %}
-            {% set do_stanza_17 = is_state('input_boolean.vacuum_stanza_17', 'on') %}
-            {% set do_stanza_18 = is_state('input_boolean.vacuum_stanza_18', 'on') %}
-            {% set do_stanza_19 = is_state('input_boolean.vacuum_stanza_19', 'on') %}
-            {% set do_stanza_20 = is_state('input_boolean.vacuum_stanza_20', 'on') %}
-            {% set do_stanza_21 = is_state('input_boolean.vacuum_stanza_21', 'on') %}
-            {% set do_stanza_22 = is_state('input_boolean.vacuum_stanza_22', 'on') %}
-            {% set do_stanza_23 = is_state('input_boolean.vacuum_stanza_23', 'on') %}
-            {% set stanza_16 = 16 if do_stanza_16 else '' %}
-            {% set stanza_17 = 17 if do_stanza_17 else '' %}
-            {% set stanza_18 = 18 if do_stanza_18 else '' %}
-            {% set stanza_19 = 19 if do_stanza_19 else '' %}
-            {% set stanza_20 = 20 if do_stanza_20 else '' %}
-            {% set stanza_21 = 21 if do_stanza_21 else '' %}
-            {% set stanza_22 = 22 if do_stanza_22 else '' %}
-            {% set stanza_23 = 23 if do_stanza_23 else '' %}
-            [{{ [stanza_16, stanza_17, stanza_18, stanza_19, stanza_20, stanza_21, stanza_22, stanza_23] | select("!=", "") | join(",") }}]
+            {% set object = [states('input_boolean.vacuum_stanza_16'), states('input_boolean.vacuum_stanza_17'), states('input_boolean.vacuum_stanza_18'), states('input_boolean.vacuum_stanza_19'), states('input_boolean.vacuum_stanza_20'), states('input_boolean.vacuum_stanza_21'), states('input_boolean.vacuum_stanza_22'), states('input_boolean.vacuum_stanza_23')] %}
+            {{ object | select('equalto', 'on') | list | count >= 1}}
 
-  ####################################################################
+      vacuum_zone_selezionate:
+        friendly_name: 'Zone Selezionate'
+        value_template: >-
+            {% set object = [states('input_boolean.vacuum_zona_1'), states('input_boolean.vacuum_zona_2'), states('input_boolean.vacuum_zona_3'), states('input_boolean.vacuum_zona_4'), states('input_boolean.vacuum_zona_5'), states('input_boolean.vacuum_zona_6')] %}
+            {{ object | select('equalto', 'on') | list | count >= 1}}
 
-  ### XXX Da cambiare le coordinate zona con quelle in configurazione    
-      vacuum_pulizia_multi_stanze:
-        friendly_name: 'Seleziona Stanze'
-        value_template: >-           
-            {% set do_stanza_16 = is_state('input_boolean.vacuum_stanza_16', 'on') %}
-            {% set do_stanza_17 = is_state('input_boolean.vacuum_stanza_17', 'on') %}
-            {% set do_stanza_18 = is_state('input_boolean.vacuum_stanza_18', 'on') %}
-            {% set do_stanza_19 = is_state('input_boolean.vacuum_stanza_19', 'on') %}
-            {% set do_stanza_20 = is_state('input_boolean.vacuum_stanza_20', 'on') %}
-            {% set do_stanza_21 = is_state('input_boolean.vacuum_stanza_21', 'on') %}
-            {% set do_stanza_22 = is_state('input_boolean.vacuum_stanza_22', 'on') %}
-            {% set do_stanza_23 = is_state('input_boolean.vacuum_stanza_23', 'on') %}
-            {% set stanza_16 = [23850, 25000, 28050, 27750, states('input_number.vacuum_ripetizioni_stanza_16') | int ] if do_stanza_16 else '' %}
-            {% set stanza_17 = [(22750, 32000, 28050, 33800, states('input_number.vacuum_ripetizioni_stanza_17')| int),(23900, 31000, 28050, 32400, states('input_number.vacuum_ripetizioni_stanza_17') | int )] if do_stanza_17 else '' %}
-            {% set stanza_18 = [20600, 29400, 22650, 31200, states('input_number.vacuum_ripetizioni_stanza_18') | int ] if do_stanza_18 else '' %}
-            {% set stanza_19 = [24250, 27800, 28250, 30800, states('input_number.vacuum_ripetizioni_stanza_19') | int ] if do_stanza_19 else '' %}
-            {% set stanza_20 = [19800, 24800, 23950, 27900, states('input_number.vacuum_ripetizioni_stanza_20') | int ] if do_stanza_20 else '' %}
-            {% set stanza_21 = [19800, 28100, 22700, 29500, states('input_number.vacuum_ripetizioni_stanza_21') | int ] if do_stanza_21 else '' %}
-            {% set stanza_22 = [19750, 31490, 22750, 34450, states('input_number.vacuum_ripetizioni_stanza_22') | int ] if do_stanza_22 else '' %}
-            {% set stanza_23 = [22800, 28100, 24200, 32200, states('input_number.vacuum_ripetizioni_stanza_23') | int ] if do_stanza_23 else '' %}
-            [{{ [stanza_16 , stanza_17, stanza_18, stanza_19, stanza_20, stanza_21, stanza_22, stanza_23] | select("!=", "") | join(",") }}]
-            
-      vacuum_pulizia_multi_zona:
-        friendly_name: 'Seleziona Zone'
-        value_template: >-           
-            {% set do_zona_1 = is_state('input_boolean.vacuum_zona_1', 'on') %}
-            {% set do_zona_2 = is_state('input_boolean.vacuum_zona_2', 'on') %}
-            {% set do_zona_3 = is_state('input_boolean.vacuum_zona_3', 'on') %}
-            {% set do_zona_4 = is_state('input_boolean.vacuum_zona_4', 'on') %}
-            {% set do_zona_5 = is_state('input_boolean.vacuum_zona_5', 'on') %}
-            {% set do_zona_6 = is_state('input_boolean.vacuum_zona_6', 'on') %}
-            {% set zona_1 = [[23850, 25000, 28050, 27750],[24250, 27800, 28250, 30800],[22750, 32000, 28050, 33800],[23900, 31000, 28050, 32400]] if do_zona_1 else '' %}
-            {% set zona_2 = [[23850, 25000, 28050, 27750],[24250, 27800, 28250, 30800]] if do_zona_2 else '' %}
-            {% set zona_3 = [[19800, 24800, 23950, 27900],[19800, 28100, 22700, 29500],[20600, 29400, 22650, 31200],[19750, 31490, 22750, 34450],[22800, 28100, 24200, 32200]] if do_zona_3 else '' %}
-            {% set zona_4 = [[19800, 28100, 22700, 29500],[19800, 28100, 22700, 29500]] if do_zona_4 else '' %}
-            {% set zona_5 = [[19800, 24800, 23950, 27900],[19750, 31490, 22750, 34450]] if do_zona_5 else '' %}
-            {% set zona_6 = [[19800, 24800, 23950, 27900],[19800, 28100, 22700, 29500],[20600, 29400, 22650, 31200],[22800, 28100, 24200, 32200]] if do_zona_6 else '' %}
-            {{ [zona_1,zona_2,zona_3,zona_4,zona_5,zona_6] | select("!=", "") | join(",") }}
-
-  ####################################################################
-
-        #16      - [[23850, 25000, 28050, 27750]]  --> Isola            -->  Blu chiaro
-        #17      - [[22750, 30800, 28050, 33650]]  --> XXX        -->  Verde
-        #18      - [[20600, 29400, 22650, 31200]]  --> Bagno Grande     -->  Rosa
-        #19      - [[24250, 27200, 29800, 30800]]  --> Tavolo           -->  Blu scuro
-        #20      - [[19800, 24800, 23950, 27900]]  --> Camera Da Letto  -->  Blu chiaro
-        #21      - [[18700, 27700, 22700, 29600]]  --> Bagno Piccolo    -->  Celeste
-        #22      - [[19750, 31300, 22750, 34850]]  --> Cameretta        -->  Viola  
-        #23      - [[22650, 27850, 24200, 32200]]  --> Corridoio        -->  Arancio
- 
-        #zona_1: --> Zona Giorno        --> (Isola-Tavolo-XXX)
-        #zona_2: --> Zona Cucina        --> (Isola-Tavolo)
-        #zona_3: --> Zona Notte         --> (CameraDaLetto-BagnoPiccolo-BagnoGrande-Cameretta-Corridoio)
-        #zona_4: --> Zona Bagni         --> (BagnoPiccolo-BagnoGrande)
-        #zona_5: --> Zona Camere        --> (CameraDaLetto-Cameretta)
-        #zona_6: --> Zona Giornaliero   --> (CameraDaLetto-BagnoPiccolo-BagnoGrande-Corridoio)
-
-
-   
 
 ################################################################################
 ##                  Script
 ###################################################
 script:
+  vacuum_pulizia_casa:
+    sequence:
+      - service: xiaomi_miio.vacuum_clean_segment
+        data_template:
+          entity_id: *entity
+          segments: *coord_casa       
+  
+           
+  vacuum_stanza_16:
+    alias: *stanza_16
+    sequence:
+      - service: xiaomi_miio.vacuum_clean_zone
+        data_template:
+          entity_id: *entity
+          zone: *coord_stanza_16
+          repeats: "{{states('input_number.vacuum_ripetizioni_stanza_16') | int }}" 
 
+  vacuum_stanza_17:
+    alias: *stanza_17 
+    sequence:
+      - service: xiaomi_miio.vacuum_clean_zone
+        data_template:
+          entity_id: *entity
+          zone: *coord_stanza_17
+          repeats: "{{states('input_number.vacuum_ripetizioni_stanza_17') | int }}"    
+
+  vacuum_stanza_18:
+    alias: *stanza_18
+    sequence:
+      - service: xiaomi_miio.vacuum_clean_zone
+        data_template:
+          entity_id: *entity
+          zone: *coord_stanza_18
+          repeats: "{{states('input_number.vacuum_ripetizioni_stanza_18') | int }}"            
+
+  vacuum_stanza_19:
+    alias: *stanza_19  
+    sequence:
+      - service: xiaomi_miio.vacuum_clean_zone
+        data_template:
+          entity_id: *entity
+          zone: *coord_stanza_19
+          repeats: "{{states('input_number.vacuum_ripetizioni_stanza_19') | int }}" 
+
+  vacuum_stanza_20:
+    alias: *stanza_20  
+    sequence:
+      - service: xiaomi_miio.vacuum_clean_zone
+        data_template:
+          entity_id: *entity
+          zone: *coord_stanza_20
+          repeats: "{{states('input_number.vacuum_ripetizioni_stanza_20') | int }}"  
+
+  vacuum_stanza_21:
+    alias: *stanza_21   
+    sequence:
+      - service: xiaomi_miio.vacuum_clean_zone
+        data_template:
+          entity_id: *entity
+          zone: *coord_stanza_21
+          repeats: "{{states('input_number.vacuum_ripetizioni_stanza_21') | int }}"  
+
+  vacuum_stanza_22:
+    alias: *stanza_22   
+    sequence:
+      - service: xiaomi_miio.vacuum_clean_zone
+        data_template:
+          entity_id: *entity
+          zone: *coord_stanza_22
+          repeats: "{{states('input_number.vacuum_ripetizioni_stanza_22') | int }}"  
+
+  vacuum_stanza_23:
+    alias: *stanza_23
+    sequence:
+      - service: xiaomi_miio.vacuum_clean_zone
+        data_template:
+          entity_id: *entity 
+          zone: *coord_stanza_23
+          repeats: "{{states('input_number.vacuum_ripetizioni_stanza_23') | int }}"            
+
+  vacuum_zona_1:
+    alias: *zona_1  
+    sequence:
+      - service: xiaomi_miio.vacuum_clean_zone
+        data_template:
+          entity_id: *entity
+          zone: *coord_zona_1
+          repeats: "{{states('input_number.vacuum_ripetizioni_zona') | int }}"  
+
+  vacuum_zona_2:
+    alias: *zona_2  
+    sequence:
+      - service: xiaomi_miio.vacuum_clean_zone
+        data_template:
+          entity_id: *entity
+          zone: *coord_zona_2
+          repeats: "{{states('input_number.vacuum_ripetizioni_zona') | int }}"
+
+  vacuum_zona_3:
+    alias: *zona_3  
+    sequence:
+      - service: xiaomi_miio.vacuum_clean_zone
+        data_template:
+          entity_id: *entity
+          zone: *coord_zona_3
+          repeats: "{{states('input_number.vacuum_ripetizioni_zona') | int }}"
+          
+  vacuum_zona_4:
+     alias: *zona_4  
+     sequence:
+       - service: xiaomi_miio.vacuum_clean_zone
+         data_template:
+           entity_id: *entity
+           zone: *coord_zona_4
+           repeats: "{{states('input_number.vacuum_ripetizioni_zona') | int }}" 
+
+  vacuum_zona_5:
+    alias: *zona_5
+    sequence:
+      - service: xiaomi_miio.vacuum_clean_zone
+        data_template:
+          entity_id: *entity
+          zone: *coord_zona_5 
+          repeats: "{{states('input_number.vacuum_ripetizioni_zona') | int }}"
+
+  vacuum_zona_6:
+    alias: *zona_6
+    sequence:
+      - service: xiaomi_miio.vacuum_clean_zone
+        data_template:
+          entity_id: *entity
+          zone: *coord_zona_6
+          repeats: "{{states('input_number.vacuum_ripetizioni_zona') | int }}"          
+
+#### MULTISTANZA        
+  vacuum_pulizia_stanze:
+    alias: Pulizia Stanze
+    sequence:
+      - condition: template
+        value_template: "{{ is_state(room_bool, 'on') }}"
+      - service: script.turn_on
+        data_template:
+          entity_id: '{{ room_cleaner }}'
+      - wait_template: "{{ is_state('XXX', 'cleaning') }}"                 #vacuum entity_id   
+      - wait_template: "{{not is_state('XXX', 'cleaning') }}"               #vacuum entity_id
+      - service: vacuum.pause
+        data_template:
+          entity_id: *entity       
+      - service: input_boolean.turn_off
+        data_template:
+          entity_id: '{{ room_bool }}'
+      - delay: '00:00:01'
+
+  vacuum_multi_stanze:
+    alias: Stanze selezionate
+    sequence:
+      - service: script.vacuum_pulizia_stanze
+        data_template:
+          room_cleaner: script.vacuum_stanza_16
+          room_bool: input_boolean.vacuum_stanza_16
+      - wait_template: "{{ is_state('script.vacuum_pulizia_stanze', 'off') }}"
+      - service: script.vacuum_pulizia_stanze
+        data_template:
+          room_cleaner: script.vacuum_stanza_17
+          room_bool: input_boolean.vacuum_stanza_17
+      - wait_template: "{{ is_state('script.vacuum_pulizia_stanze', 'off') }}"
+      - service: script.vacuum_pulizia_stanze
+        data_template:
+          room_cleaner: script.vacuum_stanza_18
+          room_bool: input_boolean.vacuum_stanza_18
+      - wait_template: "{{ is_state('script.vacuum_pulizia_stanze', 'off') }}"      
+      - service: script.vacuum_pulizia_stanze
+        data_template:
+          room_cleaner: script.vacuum_stanza_19
+          room_bool: input_boolean.vacuum_stanza_19
+      - wait_template: "{{ is_state('script.vacuum_pulizia_stanze', 'off') }}"
+      - service: script.vacuum_pulizia_stanze
+        data_template:
+          room_cleaner: script.vacuum_pulizia_cameradaletto
+          room_bool: input_boolean.vacuum_stanza_20   
+      - wait_template: "{{ is_state('script.vacuum_pulizia_stanze', 'off') }}"
+      - service: script.vacuum_pulizia_stanze
+        data_template:
+          room_cleaner: script.vacuum_stanza_21
+          room_bool: input_boolean.vacuum_stanza_21  
+      - wait_template: "{{ is_state('script.vacuum_pulizia_stanze', 'off') }}"
+      - service: script.vacuum_pulizia_stanze
+        data_template:
+          room_cleaner: script.vacuum_stanza_22
+          room_bool: input_boolean.vacuum_stanza_22  
+      - wait_template: "{{ is_state('script.vacuum_pulizia_stanze', 'off') }}"
+      - service: script.vacuum_pulizia_stanze
+        data_template:
+          room_cleaner: script.vacuum_stanza_23
+          room_bool: input_boolean.vacuum_stanza_23
+      - wait_template: "{{ is_state('script.vacuum_pulizia_stanze', 'off') }}"          
+      - service: script.vacuum_pulizia_stanze
+        data_template:
+          room_cleaner: script.vacuum_zona_1
+          room_bool: input_boolean.vacuum_zona_1
+      - wait_template: "{{ is_state('script.vacuum_pulizia_stanze', 'off') }}"          
+      - service: script.vacuum_pulizia_stanze
+        data_template:
+          room_cleaner: script.vacuum_zona_2
+          room_bool: input_boolean.vacuum_zona_2
+      - wait_template: "{{ is_state('script.vacuum_pulizia_stanze', 'off') }}"         
+      - service: script.vacuum_pulizia_stanze
+        data_template:
+          room_cleaner: script.vacuum_zona_3
+          room_bool: input_boolean.vacuum_zona_3
+      - wait_template: "{{ is_state('script.vacuum_pulizia_stanze', 'off') }}"     
+      - service: script.vacuum_pulizia_stanze
+        data_template:
+          room_cleaner: script.vacuum_zona_4
+          room_bool: input_boolean.vacuum_zona_4
+      - wait_template: "{{ is_state('script.vacuum_pulizia_stanze', 'off') }}"          
+      - service: script.vacuum_pulizia_stanze
+        data_template:
+          room_cleaner: script.vacuum_zona_5
+          room_bool: input_boolean.vacuum_zona_5
+      - wait_template: "{{ is_state('script.vacuum_pulizia_stanze', 'off') }}"         
+      - service: script.vacuum_pulizia_stanze
+        data_template:
+          room_cleaner: script.vacuum_zona_6
+          room_bool: input_boolean.vacuum_zona_6
+      - wait_template: "{{ is_state('script.vacuum_pulizia_stanze', 'off') }}"          
+      - service: script.turn_on
+        entity_id: script.vacuum_torna_a_casa             
+###########
   vacuum_torna_a_casa:
     alias: "Torna a Casa"
     sequence:
       - service: vacuum.return_to_base
-        entity_id: vacuum.XXX
+        entity_id: *entity
         
   vacuum_interrompi_pulizie:
-    alias: "Torna a Casa"
+    alias: "Ferma Pulizie"
     sequence:
       - service: vacuum.stop
-        entity_id: vacuum.XXX
+        entity_id: *entity
       - delay: '00:00:01'
       - service: vacuum.return_to_base
-        entity_id: vacuum.XXX
+        entity_id: *entity
 
   vacuum_start:
     sequence:
       - service: vacuum.start
-        entity_id: vacuum.XXX
+        entity_id: *entity
         
   vacuum_pause:
     sequence:
       - service: vacuum.pause
-        entity_id: vacuum.XXX        
+        entity_id: *entity        
 
   vacuum_stop:
     sequence:
       - service: vacuum.stop
-        entity_id: vacuum.XXX
-         
+        entity_id: *entity
+        
+  vacuum_clean_spot:
+    sequence:
+      - service: vacuum.clean_spot
+        entity_id: *entity
+        
+  vacuum_locate:
+    sequence:
+      - service: vacuum.locate
+        entity_id: *entity        
+
+  ### SET FAN ###          
   vacuum_set_fan_silent:
     sequence:
       service: vacuum.set_fan_speed
       data:
-        entity_id: vacuum.XXX
+        entity_id: *entity
         fan_speed: Silent
 
   vacuum_set_fan_standard:
     sequence:
       service: vacuum.set_fan_speed
       data:
-        entity_id: vacuum.XXX
+        entity_id: *entity
         fan_speed: Standard
 
   vacuum_set_fan_medium:
     sequence:
       service: vacuum.set_fan_speed
       data:
-        entity_id: vacuum.XXX
+        entity_id: *entity
         fan_speed: Medium
  
   vacuum_set_fan_turbo:
     sequence:
       service: vacuum.set_fan_speed
       data:
-        entity_id: vacuum.XXX
+        entity_id: *entity
         fan_speed: Turbo  
 
+  ### SET ACQUA ### 
   vacuum_set_water_off:
     sequence:
       - service: vacuum.send_command
         data_template:
           params: [200]
           command: set_water_box_custom_mode
-          entity_id: vacuum.XXX
+          entity_id: *entity
 
   vacuum_set_water_low:
     sequence:
@@ -514,7 +706,7 @@ script:
         data_template:
           params: [201]
           command: set_water_box_custom_mode
-          entity_id: vacuum.XXX
+          entity_id: *entity
           
   vacuum_set_water_medium:
     sequence:
@@ -522,7 +714,7 @@ script:
         data_template:
           params: [202]
           command: set_water_box_custom_mode
-          entity_id: vacuum.XXX
+          entity_id: *entity
   
   vacuum_set_water_high:
     sequence:
@@ -530,69 +722,38 @@ script:
         data_template:
           params: [203]
           command: set_water_box_custom_mode
-          entity_id: vacuum.XXX
+          entity_id: *entity
           
-  vacuum_set_aspirapolvere:
-    sequence:
-      - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_water_off        
-          
-  vacuum_set_lavaggio_silent:
-    sequence:
-      - service: script.turn_on
-        entity_id: script.vacuum_set_fan_silent
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_water_on  
-
+  ### SERBATOIO ### 
   vacuum_pulizia_serbatoio:
     sequence:
+      - service: script.turn_on
+        entity_id: script.vacuum_set_aspirapolvere
+      - delay: 1    
       - service: vacuum.send_command
         data_template:
-          params: [XXXXX,XXXXX] #INSERIRE LE CORDINATE PER SVUOTA SERBATOIO
+          params: *coord_cestino
           command: app_goto_target
-          entity_id: vacuum.XXX
-          
+          entity_id: *entity
+
   vacuum_carica_acqua:
     sequence:
+      - service: script.turn_on
+        entity_id: script.vacuum_set_aspirapolvere
+      - delay: 1    
       - service: vacuum.send_command
         data_template:
-          params: [XXXXX,XXXXX] #INSERIRE LE CORDINATE PER CARICA ACQUA
+          params: *coord_acqua
           command: app_goto_target
-          entity_id: vacuum.XXX          
+          entity_id: *entity          
 
-  vacuum_pulizia_casa:
-    sequence:
-      - service: xiaomi_miio.vacuum_clean_segment
-        data_template:
-          entity_id: vacuum.XXX
-          segments: [X,X,X,X,X,X,X,X ]  #INSERIRE I NUMERI DELLE STANZE
-
-  vacuum_pulizia_stanze:
-    sequence:
-      - service: vacuum.send_command
-        data_template:
-          params: "{{ states('sensor.vacuum_pulizia_multi_stanze') }}"
-          command: app_zoned_clean
-          entity_id: vacuum.XXX
-
-  vacuum_pulizia_zone:
-    sequence:
-      - service: xiaomi_miio.vacuum_clean_zone
-        data_template:
-          entity_id: vacuum.XXX
-          zone: "{{states('sensor.vacuum_pulizia_multi_zona')}}"
-          repeats: "{{states('input_number.vacuum_ripetizioni_zona') | int }}" 
-          
+  ### RESET SENSORI ###          
   vacuum_reset_main_brush_left:
     alias: "Reset ore cambio Spazzola"
     sequence:
       - service: vacuum.send_Command
         data:
-          entity_id: vacuum.XXX
+          entity_id: *entity
           command: reset_consumable
           params: ['main_brush_work_time']
           
@@ -601,7 +762,7 @@ script:
     sequence:
       - service: vacuum.send_Command
         data:
-          entity_id: vacuum.XXX
+          entity_id: *entity
           command: reset_consumable
           params: ['side_brush_work_time'] 
 
@@ -610,7 +771,7 @@ script:
     sequence:
       - service: vacuum.send_Command
         data:
-          entity_id: vacuum.XXX
+          entity_id: *entity
           command: reset_consumable
           params: ['filter_work_time']  
 
@@ -619,12 +780,46 @@ script:
     sequence:
       - service: vacuum.send_Command
         data:
-          entity_id: vacuum.XXX
+          entity_id: *entity
           command: reset_consumable
-          params: ['sensor_dirty_time']            
+          params: ['sensor_dirty_time']  
 
+  vacuum_set_aspirapolvere:
+    sequence:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.vacuum_fan_speed
+          option: Turbo
+      - delay: 1
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.vacuum_set_water_off
+          option: 'off'             
+          
+  vacuum_set_lavaggio_silent:
+    sequence:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.vacuum_fan_speed
+          option: Silenzioso
+      - delay: 1
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.vacuum_set_water_off
+          option: high 
 
-### XXX CANCELLARE QUESTA PARTE DI CODICE SE SI USA ALEXA
+  vacuum_set_lavaggio:
+    sequence:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.vacuum_fan_speed
+          option: Turbo
+      - delay: 1
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.vacuum_set_water_off
+          option: high 
+
 ###################################################
 ##                  Pulizie con Google
 ###################################################
@@ -632,135 +827,112 @@ script:
   ######################
   ##  ASPIRA
   ######################
-  vacuum_pulizia_isola:
+  vacuum_pulizia_stanza_16:
+    alias: *stanza_16  
     sequence:
       - service: homeassistant.turn_on
         data:
           entity_id: 
             - input_boolean.vacuum_stanza_16          
+      - service: script.turn_on
+        entity_id: script.vacuum_set_aspirapolvere
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_water_off        
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze
+        entity_id: script.vacuum_multi_stanze
 
-  vacuum_pulizia_XXX:
+  vacuum_pulizia_stanza_17:
+    alias: *stanza_17
     sequence:
       - service: homeassistant.turn_on
         data:
           entity_id: 
-            - input_boolean.vacuum_stanza_17          
+            - input_boolean.vacuum_stanza_17         
+      - service: script.turn_on
+        entity_id: script.vacuum_set_aspirapolvere
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_water_off        
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze
-
-  vacuum_pulizia_bagnogrande:
-    sequence:
-      - service: homeassistant.turn_on
-        data:
-          entity_id: 
-            - input_boolean.vacuum_stanza_18          
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_water_off        
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze
+        entity_id: script.vacuum_multi_stanze
         
-  vacuum_pulizia_tavolo:
+  vacuum_pulizia_stanza_18:
+    alias: *stanza_18
+    sequence:
+      - service: homeassistant.turn_on
+        data:
+          entity_id: 
+            - input_boolean.vacuum_stanza_18         
+      - service: script.turn_on
+        entity_id: script.vacuum_set_aspirapolvere
+      - delay: 1
+      - service: script.turn_on
+        entity_id: script.vacuum_multi_stanze
+        
+  vacuum_pulizia_stanza_19:
+    alias: *stanza_19
     sequence:
       - service: homeassistant.turn_on
         data:
           entity_id: 
             - input_boolean.vacuum_stanza_19          
+      - service: script.turn_on
+        entity_id: script.vacuum_set_aspirapolvere
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_water_off        
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze
+        entity_id: script.vacuum_multi_stanze
         
-  vacuum_pulizia_cameradaletto:
+  vacuum_pulizia_stanza_20:
+    alias: *stanza_20
     sequence:
       - service: homeassistant.turn_on
         data:
           entity_id: 
             - input_boolean.vacuum_stanza_20          
+      - service: script.turn_on
+        entity_id: script.vacuum_set_aspirapolvere
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_water_off        
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze
+        entity_id: script.vacuum_multi_stanze
 
-  vacuum_pulizia_bagnopiccolo:
+  vacuum_pulizia_stanza_21:
+    alias: *stanza_21
     sequence:
       - service: homeassistant.turn_on
         data:
           entity_id: 
             - input_boolean.vacuum_stanza_21          
+      - service: script.turn_on
+        entity_id: script.vacuum_set_aspirapolvere
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_water_off        
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze
+        entity_id: script.vacuum_multi_stanze
 
-  vacuum_pulizia_cameretta:
+  vacuum_pulizia_stanza_22:
+    alias: *stanza_22
     sequence:
       - service: homeassistant.turn_on
         data:
           entity_id: 
-            - input_boolean.vacuum_stanza_22         
+            - input_boolean.vacuum_stanza_22          
+      - service: script.turn_on
+        entity_id: script.vacuum_set_aspirapolvere
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_water_off        
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze
+        entity_id: script.vacuum_multi_stanze
         
-  vacuum_pulizia_corridoio:
+  vacuum_pulizia_stanza_23:
+    alias: *stanza_23  
     sequence:
       - service: homeassistant.turn_on
         data:
           entity_id: 
-            - input_boolean.vacuum_stanza_23         
+            - input_boolean.vacuum_stanza_23          
+      - service: script.turn_on
+        entity_id: script.vacuum_set_aspirapolvere
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_water_off        
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze
+        entity_id: script.vacuum_multi_stanze
         
-  vacuum_pulizia_zonagiorno:
+  vacuum_pulizia_zona_1:
+    alias: *zona_1
     sequence:
       - service: homeassistant.turn_on
         data:
@@ -768,7 +940,7 @@ script:
             - input_boolean.vacuum_zona_1        
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
+        entity_id: script.vacuum_set_aspirapolvere
       - delay: 1
       - service: script.turn_on
         entity_id: script.vacuum_set_water_off        
@@ -776,7 +948,8 @@ script:
       - service: script.turn_on
         entity_id: script.vacuum_pulizia_stanze      
 
-  vacuum_pulizia_zonacucina:
+  vacuum_pulizia_zona_2:
+    alias: *zona_2
     sequence:
       - service: homeassistant.turn_on
         data:
@@ -784,7 +957,7 @@ script:
             - input_boolean.vacuum_zona_2        
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
+        entity_id: script.vacuum_set_aspirapolvere
       - delay: 1
       - service: script.turn_on
         entity_id: script.vacuum_set_water_off        
@@ -792,7 +965,8 @@ script:
       - service: script.turn_on
         entity_id: script.vacuum_pulizia_stanze 
 
-  vacuum_pulizia_zonanotte:
+  vacuum_pulizia_zona_3:
+    alias: *zona_3
     sequence:
       - service: homeassistant.turn_on
         data:
@@ -800,7 +974,7 @@ script:
             - input_boolean.vacuum_zona_3      
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
+        entity_id: script.vacuum_set_aspirapolvere
       - delay: 1
       - service: script.turn_on
         entity_id: script.vacuum_set_water_off        
@@ -808,7 +982,8 @@ script:
       - service: script.turn_on
         entity_id: script.vacuum_pulizia_stanze
 
-  vacuum_pulizia_zonabagni:
+  vacuum_pulizia_zona_4:
+    alias: *zona_4
     sequence:
       - service: homeassistant.turn_on
         data:
@@ -816,7 +991,7 @@ script:
             - input_boolean.vacuum_zona_4      
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
+        entity_id: script.vacuum_set_aspirapolvere
       - delay: 1
       - service: script.turn_on
         entity_id: script.vacuum_set_water_off        
@@ -824,7 +999,8 @@ script:
       - service: script.turn_on
         entity_id: script.vacuum_pulizia_stanze
 
-  vacuum_pulizia_zonacamere:
+  vacuum_pulizia_zona_5:
+    alias: *zona_5
     sequence:
       - service: homeassistant.turn_on
         data:
@@ -832,7 +1008,7 @@ script:
             - input_boolean.vacuum_zona_5      
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
+        entity_id: script.vacuum_set_aspirapolvere
       - delay: 1
       - service: script.turn_on
         entity_id: script.vacuum_set_water_off        
@@ -840,7 +1016,8 @@ script:
       - service: script.turn_on
         entity_id: script.vacuum_pulizia_stanze        
          
-  vacuum_pulizia_zonagiornaliero:
+  vacuum_pulizia_zona_6:
+    alias: *zona_6
     sequence:
       - service: homeassistant.turn_on
         data:
@@ -848,7 +1025,7 @@ script:
             - input_boolean.vacuum_zona_6      
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
+        entity_id: script.vacuum_set_aspirapolvere
       - delay: 1
       - service: script.turn_on
         entity_id: script.vacuum_set_water_off        
@@ -856,154 +1033,115 @@ script:
       - service: script.turn_on
         entity_id: script.vacuum_pulizia_stanze
         
-  vacuum_pulizia_zonagiornaliero:    
-    sequence:
-      - service: homeassistant.turn_on
-        data:
-          entity_id: 
-            - input_boolean.vacuum_zona_6      
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_water_off        
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze 
-
   ######################
   ##  LAVA
   ######################
-  vacuum_lava_isola:
+  vacuum_lava_stanza_16:
+    alias: *stanza_16   
     sequence:
       - service: homeassistant.turn_on
         data:
           entity_id: 
             - input_boolean.vacuum_stanza_16          
+      - service: script.turn_on
+        entity_id: script.vacuum_set_lavaggio
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_water_high        
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze
+        entity_id: script.vacuum_multi_stanze
 
-  vacuum_lava_XXX:
+  vacuum_lava_stanza_17:
+    alias: *stanza_17  
     sequence:
       - service: homeassistant.turn_on
         data:
           entity_id: 
-            - input_boolean.vacuum_stanza_17          
+            - input_boolean.vacuum_stanza_17         
+      - service: script.turn_on
+        entity_id: script.vacuum_set_lavaggio
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_water_high     
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze
-
-  vacuum_lava_bagnogrande:
-    sequence:
-      - service: homeassistant.turn_on
-        data:
-          entity_id: 
-            - input_boolean.vacuum_stanza_18          
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_water_high        
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze
+        entity_id: script.vacuum_multi_stanze
         
-  vacuum_lava_tavolo:
+  vacuum_lava_stanza_18:
+    alias: *stanza_18
+    sequence:
+      - service: homeassistant.turn_on
+        data:
+          entity_id: 
+            - input_boolean.vacuum_stanza_18         
+      - service: script.turn_on
+        entity_id: script.vacuum_set_lavaggio
+      - delay: 1
+      - service: script.turn_on
+        entity_id: script.vacuum_multi_stanze
+        
+  vacuum_lava_stanza_19:
+    alias: *stanza_19  
     sequence:
       - service: homeassistant.turn_on
         data:
           entity_id: 
             - input_boolean.vacuum_stanza_19          
+      - service: script.turn_on
+        entity_id: script.vacuum_set_lavaggio
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_water_high         
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze
+        entity_id: script.vacuum_multi_stanze
         
-  vacuum_lava_cameradaletto:
+  vacuum_lava_stanza_20:
+    alias: *stanza_20
     sequence:
       - service: homeassistant.turn_on
         data:
           entity_id: 
             - input_boolean.vacuum_stanza_20          
+      - service: script.turn_on
+        entity_id: script.vacuum_set_lavaggio
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_water_high        
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze
+        entity_id: script.vacuum_multi_stanze
 
-  vacuum_lava_bagnopiccolo:
+  vacuum_lava_stanza_21:
+    alias: *stanza_21
     sequence:
       - service: homeassistant.turn_on
         data:
           entity_id: 
             - input_boolean.vacuum_stanza_21          
+      - service: script.turn_on
+        entity_id: script.vacuum_set_lavaggio
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_water_high        
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze
+        entity_id: script.vacuum_multi_stanze
 
-  vacuum_lava_cameretta:
+  vacuum_lava_stanza_22:
+    alias: *stanza_22
     sequence:
       - service: homeassistant.turn_on
         data:
           entity_id: 
-            - input_boolean.vacuum_stanza_22         
+            - input_boolean.vacuum_stanza_22          
+      - service: script.turn_on
+        entity_id: script.vacuum_set_lavaggio
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_water_high        
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze
+        entity_id: script.vacuum_multi_stanze
         
-  vacuum_lava_corridoio:
+  vacuum_lava_stanza_23:
+    alias: *stanza_23
     sequence:
       - service: homeassistant.turn_on
         data:
           entity_id: 
-            - input_boolean.vacuum_stanza_23         
+            - input_boolean.vacuum_stanza_23          
+      - service: script.turn_on
+        entity_id: script.vacuum_set_lavaggio
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_water_high        
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze
+        entity_id: script.vacuum_multi_stanze
         
-  vacuum_lava_zonagiorno:
+  vacuum_lava_zona_1:
+    alias: *zona_1 
     sequence:
       - service: homeassistant.turn_on
         data:
@@ -1011,15 +1149,16 @@ script:
             - input_boolean.vacuum_zona_1        
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
+        entity_id: script.vacuum_set_lavaggio
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_water_high        
+        entity_id: script.vacuum_set_water_off        
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze      
+        entity_id: script.vacuum_multi_stanze      
 
-  vacuum_lava_zonacucina:
+  vacuum_lavaa_zona_2:
+    alias: *zona_2
     sequence:
       - service: homeassistant.turn_on
         data:
@@ -1027,15 +1166,16 @@ script:
             - input_boolean.vacuum_zona_2        
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
+        entity_id: script.vacuum_set_lavaggio
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_water_high        
+        entity_id: script.vacuum_set_water_off        
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze 
+        entity_id: script.vacuum_multi_stanze
 
-  vacuum_lava_zonanotte:
+  vacuum_lava_zona_3:
+    alias: *zona_3
     sequence:
       - service: homeassistant.turn_on
         data:
@@ -1043,15 +1183,16 @@ script:
             - input_boolean.vacuum_zona_3      
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
+        entity_id: script.vacuum_set_lavaggio
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_water_high        
+        entity_id: script.vacuum_set_water_off        
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze
+        entity_id: script.vacuum_multi_stanze
 
-  vacuum_lava_zonabagni:
+  vacuum_lava_zona_4:
+    alias: *zona_4
     sequence:
       - service: homeassistant.turn_on
         data:
@@ -1059,15 +1200,16 @@ script:
             - input_boolean.vacuum_zona_4      
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
+        entity_id: script.vacuum_set_lavaggio
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_water_high        
+        entity_id: script.vacuum_set_water_off        
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze
+        entity_id: script.vacuum_multi_stanze
 
-  vacuum_lava_zonacamere:
+  vacuum_lava_zona_5:
+    alias: *zona_5  
     sequence:
       - service: homeassistant.turn_on
         data:
@@ -1075,15 +1217,16 @@ script:
             - input_boolean.vacuum_zona_5      
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
+        entity_id: script.vacuum_set_lavaggio
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_water_high        
+        entity_id: script.vacuum_set_water_off        
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze        
+        entity_id: script.vacuum_multi_stanze        
          
-  vacuum_lava_zonagiornaliero:
+  vacuum_lava_zona_6:
+    alias: *zona_6  
     sequence:
       - service: homeassistant.turn_on
         data:
@@ -1091,42 +1234,15 @@ script:
             - input_boolean.vacuum_zona_6      
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
+        entity_id: script.vacuum_set_lavaggio
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_set_water_high        
+        entity_id: script.vacuum_set_water_off        
       - delay: 1
       - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze
-        
-  vacuum_lava_zonagiornaliero:    
-    sequence:
-      - service: homeassistant.turn_on
-        data:
-          entity_id: 
-            - input_boolean.vacuum_zona_6      
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_fan_turbo
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_set_water_high        
-      - delay: 1
-      - service: script.turn_on
-        entity_id: script.vacuum_pulizia_stanze 
-      
-################################################################################
-##                  Alert
-###################################################
-#alert:
-#  vacuum_richiesta_pulizia:
-#    name: richiesta pulizia
-#    entity_id: input_boolean.vacuum_allert_richiesta_pulizia
-#    state: 'on'
-#    repeat: 1
-#    can_acknowledge: true
-#    notifiers:
-#      - notifica_richiesta_pulizie
+        entity_id: script.vacuum_multi_stanze
+
+####### FINE SCRIPT PER GOOGLE      
 
 ################################################################################
 ##                  Automations
@@ -1137,20 +1253,20 @@ automation:
 #    initial_state: 'on'
 #    trigger:
 #      platform: state
-#      entity_id: vacuum.XXX
+#      entity_id: XXX
 #      attribute: fan_speed
 #    action:
 #      - service: input_select.set_options
 #        entity_id: input_select.vacuum_fan_speed
 #        data_template:
 #          options: >
-#            {% if state_attr('vacuum.XXX', 'fan_speed') == 'Silent' %}
+#            {% if state_attr('XXX', 'fan_speed') == 'Silent' %}
 #             Silenzioso
-#            {% elif state_attr('vacuum.XXX', 'fan_speed') == 'Standard' %}
+#            {% elif state_attr('XXX', 'fan_speed') == 'Standard' %}
 #             Bilanciato
-#            {% elif state_attr('vacuum.XXX', 'fan_speed') == 'Medium' %}
+#            {% elif state_attr('XXX', 'fan_speed') == 'Medium' %}
 #             Medio
-#            {% elif state_attr('vacuum.XXX', 'fan_speed') == 'Turbo' %}
+#            {% elif state_attr('XXX', 'fan_speed') == 'Turbo' %}
 #             Turbo
 #            {% endif %}
 
@@ -1194,7 +1310,7 @@ automation:
     initial_state: true
     trigger:
       - platform: state
-        entity_id: vacuum.XXX
+        entity_id: *entity
         to: "paused"
         for: "00:05:00"
     action:
@@ -1204,7 +1320,7 @@ automation:
     initial_state: true
     trigger:
       - platform: state
-        entity_id: vacuum.XXX
+        entity_id: *entity
         to: "unknown"
         for: "00:05:00"
     action:
@@ -1218,18 +1334,15 @@ automation:
     initial_state: true
     trigger:
       - platform: state
-        entity_id: vacuum.XXX
+        entity_id: *entity
         to: 'cleaning'
         for:
-          minutes: 3
+          minutes: 2
     condition: []
     action:
       service: counter.increment
       data:
         entity_id: counter.vacuum_pulizie_effettuate
-      delay: 1
-      service: script.turn_on
-        entity_id: script.vacuum_pulizia_serbatoio             
 
   - alias: Vacuum-Ripristino Counter Pulizia
     initial_state: true
@@ -1257,17 +1370,17 @@ automation:
           disable_notification: false
           disable_web_page_preview: false
           message: >
-            {{ "\U0001F30A"}} '*Ambrogio*':
+            {{ "\U0001F30A"}} '*XXX*':                              #NOME ASSISTENTE
             
             Hai effettuato 6 pulizie senza svuotare il serbatoio. Svuota il Serbatoio!!!
           parse_mode: markdown
-          target: 'XXXXXXXXX'  # Inserire ID TELEGRAM dove mandare messaggio
+          target: *telegram
           timeout: 1000
         service: telegram_bot.send_message
       - service: tts.google_say
-        entity_id: media_player.XXX # Inserire il nome del dispositivo dove riprodurre il messaggio
+        entity_id: *play
         data:
-          message: "Ti ricordo che devi svuotare il serbatoio di XXX!"             
+          message: "Ti ricordo che devi svuotare il serbatoio di XXX!"      #NOME ASSISTENTE            
 
 
   ################
@@ -1278,7 +1391,7 @@ automation:
     initial_state: true
     trigger:
       platform: state
-      entity_id: vacuum.XXX
+      entity_id: *entity
       from: 'docked'
       to: 'cleaning'
       for:
@@ -1289,67 +1402,62 @@ automation:
           disable_notification: false
           disable_web_page_preview: false
           message: >
-            {{ "\U0001F30A"}} '*Ambrogio*':
+            {{ "\U0001F30A"}} '*XXX*':                                          #NOME ASSISTENTE
             
             Pulizia Casa Avviata
           parse_mode: markdown
-          target: 'XXXXXXXXX'  # Inserire ID TELEGRAM dove mandare messaggio
+          target: *telegram
           timeout: 1000
         service: telegram_bot.send_message
       - service: tts.google_say
-        entity_id: media_player.XXX  # Inserire il nome del dispositivo dove riprodurre il messaggio
+        entity_id: *play
         data:
-          message: "Sono le {{ states('sensor.time') }}, e Ambrogio inizia a pulire casa "           
+          message: "Sono le {{ states('sensor.time') }}, e XXX inizia a pulire casa "       #NOME ASSISTENTE     
 
 
   - alias: Vacuum-Notifica fine pulizie
     initial_state: true
     trigger:
       platform: state
-      entity_id: sensor.vacuum_stato
-      from: 'Returning home'
-      to: 'Charging'
+      entity_id: *entity
+      from: 'returning'
+      to: 'docked'
     condition: []
     action:
       - data:
           disable_notification: false
           disable_web_page_preview: false
           message: >
-            {{ "\U0001F30A"}} '*Ambrogio*':
+            {{ "\U0001F30A"}} '*XXX*':                                          #NOME ASSISTENTE
             
             Pulizia Casa Terminata Si ricorda di svuotare il serbatoio !
           parse_mode: markdown
-          target: 'XXXXXXXXX'  # Inserire ID TELEGRAM dove mandare messaggio
+          target: *telegram
           timeout: 1000
         service: telegram_bot.send_message
       - service: tts.google_say
-        entity_id: media_player.XXX # Inserire il nome del dispositivo dove riprodurre il messaggio
+        entity_id: *play
         data:
-          message: "Sono le {{ states('sensor.time') }}, e Ambrogio ha terminato le pulizie"  
-      - service: homeassistant.turn_off
+          message: "Sono le {{ states('sensor.time') }}, e XXX ha terminato le pulizie"    #NOME ASSISTENTE
+      - service: input_number.set_value
         data:
           entity_id: 
-            - input_boolean.vacuum_stanza_16          
-            - input_boolean.vacuum_stanza_17  
-            - input_boolean.vacuum_stanza_18          
-            - input_boolean.vacuum_stanza_19
-            - input_boolean.vacuum_stanza_20          
-            - input_boolean.vacuum_stanza_21   
-            - input_boolean.vacuum_stanza_22          
-            - input_boolean.vacuum_stanza_23
-            - input_boolean.vacuum_stanza_16          
-            - input_boolean.vacuum_zona_1            
-            - input_boolean.vacuum_zona_2 
-            - input_boolean.vacuum_zona_3            
-            - input_boolean.vacuum_zona_4 
-            - input_boolean.vacuum_zona_5            
-            - input_boolean.vacuum_zona_6
+            - input_number.vacuum_ripetizioni_stanza_16 
+            - input_number.vacuum_ripetizioni_stanza_17 
+            - input_number.vacuum_ripetizioni_stanza_18 
+            - input_number.vacuum_ripetizioni_stanza_19
+            - input_number.vacuum_ripetizioni_stanza_20 
+            - input_number.vacuum_ripetizioni_stanza_21 
+            - input_number.vacuum_ripetizioni_stanza_22 
+            - input_number.vacuum_ripetizioni_stanza_23
+            - input_number.vacuum_ripetizioni_zona             
+          value: "1.0"             
             
   - alias: Vacuum-Notifica base scollegata
     initial_state: true
     trigger:
       platform: state
-      entity_id: sensor.vacuum_stato
+      entity_id: *entity
       to: 'unknown'
       for:
         minutes: 10
@@ -1358,24 +1466,24 @@ automation:
           disable_notification: false
           disable_web_page_preview: false
           message: >
-            {{ "\U0001F30A"}} '*Ambrogio*':
+            {{ "\U0001F30A"}} '*XXX*':                                      #NOME ASSISTENTE
             
             Sembra che la base non sia più collegata alla corrente.
           parse_mode: markdown
-          target: 'XXXXXXXXX'  # Inserire ID TELEGRAM dove mandare messaggio
+          target: *telegram
           timeout: 1000
         service: telegram_bot.send_message 
       - service: tts.google_say
-        entity_id: media_player.XXX # Inserire il nome del dispositivo dove riprodurre il messaggio
+        entity_id: *play
         data:
-          message: "Sembra che la base di Ambrogio non sia più collegata alla corrente!"     
+          message: "Sembra che la base di XXX non sia più collegata alla corrente!"         #NOME ASSISTENTE
 
   - id: Vacuum-Notifica in errore
     alias: Vacuum-Notifica in errore
     initial_state: true
     trigger:
       - platform: state
-        entity_id: vacuum.XXX
+        entity_id: *entity
         to: "error"
         for: "00:05:00"
     action:
@@ -1383,17 +1491,17 @@ automation:
           disable_notification: false
           disable_web_page_preview: false
           message: >
-            {{ "\U0001F30A"}} '*Ambrogio - Vacuum Error*'
+            {{ "\U0001F30A"}} '*XXX - Vacuum Error*'                                #NOME ASSISTENTE
             
-            "Attenzione. Probabilmente Ambrogio ha un problema. Qualcuno può controllare? Grazie."
+            "Attenzione. Probabilmente XXX ha un problema. Qualcuno può controllare? Grazie."     #NOME ASSISTENTE
           parse_mode: markdown
-          target: 'XXXXXXXXX'  # Inserire ID TELEGRAM dove mandare messaggio
+          target: *telegram
           timeout: 1000
         service: telegram_bot.send_message 
       - service: tts.google_say
-        entity_id: media_player.XXX # Inserire il nome del dispositivo dove riprodurre il messaggio
+        entity_id: *play
         data:
-          message: "Attenzione. Probabilmente Ambrogio ha un problema. Qualcuno può controllare? Grazie."
+          message: "Attenzione. Probabilmente XXX ha un problema. Qualcuno può controllare? Grazie."    #NOME ASSISTENTE
           
   #######################
   ##  NOTIFICHE RICAMBI
@@ -1402,7 +1510,7 @@ automation:
     initial_state: true
     trigger:
       platform: template
-      value_template: "{{ state_attr('vacuum.XXX', 'filter_left') | int < 14 }}"
+      value_template: "{{ state_attr('XXX', 'filter_left') | int < 14 }}"          #vacuum entity_id
     condition:
       - condition: state
         entity_id: binary_sensor.connessione_vacuum
@@ -1412,11 +1520,11 @@ automation:
           disable_notification: false
           disable_web_page_preview: false
           message: >
-            {{ "\U0001F30A"}} '*Ambrogio - Ricambi*'
+            {{ "\U0001F30A"}} '*XXX - Ricambi*'                         # NOME ASSISTENTE
             
-            "Livello di usra del filtro: {{ state_attr('vacuum.XXX', 'filter_left') }}/150.Prevedi la sostituzione!"
+            "Livello di usra del filtro: {{ states(sensor.vacuum_filtro) }}%.Prevedi la sostituzione!"
           parse_mode: markdown
-          target: 'XXXXXXXXX'  # Inserire ID TELEGRAM dove mandare messaggio
+          target: *telegram
           timeout: 1000
         service: telegram_bot.send_message
     
@@ -1425,7 +1533,7 @@ automation:
     initial_state: true
     trigger:
       platform: template
-      value_template: "{{ state_attr('vacuum.XXX', 'side_brush_left')| int < 20 }}"
+      value_template: "{{ state_attr('XXX', 'side_brush_left')| int < 20 }}"       #vacuum entity_id
     condition:
       - condition: state
         entity_id: binary_sensor.connessione_vacuum
@@ -1435,11 +1543,11 @@ automation:
           disable_notification: false
           disable_web_page_preview: false
           message: >
-            {{ "\U0001F30A"}} '*Ambrogio - Ricambi*'
+            {{ "\U0001F30A"}} '*XXX - Ricambi*'                                             #NOME ASSISTENTE
             
-            "Livello di usra della spazzolina: {{ state_attr('vacuum.XXX', 'side_brush_left') }}/200.Prevedi la sostituzione"
+            "Livello di usra della spazzolina: {{ states(sensor.vacuum_spazzolina) }}%.Prevedi la sostituzione"
           parse_mode: markdown
-          target: 'XXXXXXXXX'  # Inserire ID TELEGRAM dove mandare messaggio
+          target: *telegram
           timeout: 1000
         service: telegram_bot.send_message
             
@@ -1449,7 +1557,7 @@ automation:
     initial_state: true
     trigger:
       platform: template
-      value_template: "{{ state_attr('vacuum.XXX', 'main_brush_left') | int < 10 }}"
+      value_template: "{{ state_attr('XXX', 'main_brush_left') | int < 10 }}"              #vacuum entity_id
     condition:
       - condition: state
         entity_id: binary_sensor.connessione_vacuum
@@ -1459,11 +1567,11 @@ automation:
           disable_notification: false
           disable_web_page_preview: false
           message: >
-            {{ "\U0001F30A"}} '*Ambrogio - Ricambi*':
+            {{ "\U0001F30A"}} '*XXX - Ricambi*':                        #NOME ASSISTENTE
             
-            "Livello di usura della spazzola principale: {{ state_attr('vacuum.XXX', 'main_brush_left') }}/300.Prevedi la sostituzione!"
+            "Livello di usura della spazzola principale: {{ states(sensor.vacuum_spazzola_centrale) }}%.Prevedi la sostituzione!"
           parse_mode: markdown
-          target: 'XXXXXXXXX'  # Inserire ID TELEGRAM dove mandare messaggio
+          target: *telegram
           timeout: 1000
         service: telegram_bot.send_message      
     
@@ -1473,7 +1581,7 @@ automation:
     initial_state: true
     trigger:
       platform: template
-      value_template: "{{ state_attr('vacuum.XXX', 'sensor_dirty_left') | int < 2 }}"
+      value_template: "{{ state_attr('XXX', 'sensor_dirty_left') | int < 2 }}"             #vacuum entity_id
     condition:
       - condition: state
         entity_id: binary_sensor.connessione_vacuum
@@ -1483,11 +1591,11 @@ automation:
           disable_notification: false
           disable_web_page_preview: false
           message: >
-            {{ "\U0001F30A"}} '*Ambrogio - Sensori Sporchi*'
+            {{ "\U0001F30A"}} '*XXX - Sensori Sporchi*'                                                 #NOME ASSISTENTE
             
-            "Livello di sporco sensori: {{ state_attr('vacuum.XXX', 'sensor_dirty_left') }}/30. Eseguire una pulizia!"
+            "Livello di sporco sensori: {{ states(sensor.vacuum_sensori) }}%. Eseguire una pulizia!"
           parse_mode: markdown
-          target: 'XXXXXXXXX'  # Inserire ID TELEGRAM dove mandare messaggio
+          target: *telegram
           timeout: 1000
         service: telegram_bot.send_message
 
@@ -1505,11 +1613,33 @@ automation:
         disable_notification: false
         disable_web_page_preview: false
         message: >
-          {{ "\U0001F30A"}} *Robot cambio stato*
+          {{ "\U0001F30A"}} *Robot cambio stato Ping*
           
           STATO: {{states('binary_sensor.connessione_vacuum') }}
         parse_mode: markdown
-        target: 'XXXXXXXXX'  # Inserire ID TELEGRAM dove mandare messaggio
+        target: *telegram
         timeout: 1000
       service: telegram_bot.send_message
-    mode: single    
+    mode: single   
+
+  - id: 'Vacuum-Notifica Cambio stato1'
+    initial_state: true
+    alias: Notifica - Vacuum cambio stato1
+    trigger:
+    - platform: state
+      entity_id: *entity
+      to: 'error'
+    condition: []
+    action:
+    - data:
+        disable_notification: false
+        disable_web_page_preview: false
+        message: >
+          {{ "\U0001F30A"}} *Robot cambio stato XXX*
+          
+          STATO: {{states('XXX') }}                            #vacuum entity_id
+        parse_mode: markdown
+        target: *telegram
+        timeout: 1000
+      service: telegram_bot.send_message
+    mode: single       
