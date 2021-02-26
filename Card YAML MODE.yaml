@@ -205,7 +205,7 @@
                       action: call-service
                       service: script.turn_on
                       service_data:
-                        entity_id: vacuum_torna_a_casa
+                        entity_id: script.vacuum_torna_a_casa
                     entity: XXX                                                #vacuum entity_id
                   - type: 'custom:button-card'
                     icon: 'mdi:play'
@@ -219,7 +219,7 @@
                     tap_action:
                       service: script.turn_on
                       service_data:
-                        entity_id: vacuum_start
+                        entity_id: script.vacuum_start
                     entity: XXX                                                #vacuum entity_id
                   - type: 'custom:button-card'
                     icon: 'mdi:pause'
@@ -233,7 +233,7 @@
                     tap_action:
                       service: script.turn_on
                       service_data:
-                        entity_id: vacuum_pause
+                        entity_id: script.vacuum_pause
                     entity: XXX                                                #vacuum entity_id
                   - type: 'custom:button-card'
                     icon: 'mdi:stop'
@@ -247,7 +247,7 @@
                     tap_action:
                       service: script.turn_on
                       service_data:
-                        entity_id: vacuum_stop
+                        entity_id: script.vacuum_stop
                     entity: XXX                                                #vacuum entity_id
               - type: 'custom:hui-horizontal-stack-card'
                 cards:
@@ -277,7 +277,7 @@
                     tap_action:
                       service: script.turn_on
                       service_data:
-                        entity_id: vacuum_locate
+                        entity_id: script.vacuum_locate
                     entity: XXX                                                #vacuum entity_id
                   - type: 'custom:button-card'
                     icon: 'mdi:delete'
