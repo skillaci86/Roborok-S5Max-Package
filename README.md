@@ -1,6 +1,7 @@
 # Roborok-S5Max-Package
 Gestione Roborock S5Max da HomeAssistant
-
+Questo pacchetto è stato copiato da [un altro progetto](https://github.com/calas80/Xiaomi-Vacuum-Package) ovviamente customizzato in base alle mie esigenze.
+Per questo ringrazio [Francesco](https://github.com/calas80?fbclid=IwAR2yQqnBY2kxkX0PnZuzGbkNR9QGlJ40EaCL-U-8fKcbVHwoEjjL34cAeiM) per aver messo a disposizione gran parte del codice.
 
 <img src="https://github.com/skillaci86/Roborok-S5Max-Package/blob/main/Anteprima.png" alt="Anteprima">
 
